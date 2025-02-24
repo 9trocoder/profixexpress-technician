@@ -66,36 +66,51 @@ function Signuppage() {
     }
   };
   return (
-    <div style={{ display: "grid", width: 400 }}>
-      <label htmlFor=''>Email</label>
-      <input
-        type='text'
-        name='email'
-        placeholder='please enter your email'
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <label htmlFor=''>Password</label>
-      <input
-        type='password'
-        name='password'
-        placeholder='enter password'
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <label htmlFor=''>Confirm password</label>
-      <input
-        type='password'
-        name='confirmPassword'
-        placeholder='re-enter password'
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-        required
-      />
-      <button onClick={handleSignUp}>Continue</button>
-      <p>
+    <div className='signin_cnt'>
+      <h2 className='signin_title'>Sign up to create an account with us.</h2>
+      <p className='signin_para'>
+        Welcome to Profixexpress. Kindly create your account.
+      </p>
+      <div className='inputcnt'>
+        <label htmlFor=''>Email</label>
+        <input
+          type='text'
+          name='email'
+          placeholder='please enter your email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </div>
+
+      <div className='inputcnt'>
+        <label htmlFor=''>Password</label>
+        <input
+          type='password'
+          name='password'
+          placeholder='enter password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </div>
+
+      <div className='inputcnt'>
+        <label htmlFor=''>Confirm password</label>
+        <input
+          type='password'
+          name='confirmPassword'
+          placeholder='re-enter password'
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+      </div>
+
+      <button className='thesigninbtn' onClick={handleSignUp}>
+        Continue
+      </button>
+      <p className='forgotpassworkclick'>
         I have an account ? <span onClick={() => navigate("/")}>Sign in</span>
       </p>
     </div>
