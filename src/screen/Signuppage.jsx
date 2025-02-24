@@ -95,6 +95,9 @@ function Signuppage() {
         required
       />
       <button onClick={handleSignUp}>Continue</button>
+      <p>
+        I have an account ? <span onClick={() => navigate("/")}>Sign in</span>
+      </p>
     </div>
   );
 }

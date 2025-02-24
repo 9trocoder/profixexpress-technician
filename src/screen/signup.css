@@ -1,0 +1,97 @@
+/* Sign in */
+
+.signin_cnt {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.signin_title {
+  color: #16291e;
+  font-family: Instrument Serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 41.6px;
+  letter-spacing: -2%;
+}
+
+.signin_para {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21.7px;
+  letter-spacing: -1%;
+  color: #717171;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.inputcnt {
+  display: grid;
+  gap: 5px;
+}
+
+.inputcnt label {
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22.96px;
+  letter-spacing: -2%;
+  color: #000000;
+}
+
+.inputcnt input {
+  border: 1px solid #dcdcdc;
+  padding: 16px 17px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.52px;
+  letter-spacing: -2%;
+  outline: none;
+}
+
+.inputcnt input:focus {
+  outline: 0.5px solid #80ffb5;
+}
+
+.inputcnt input::placeholder {
+  color: #dcdcdc;
+}
+
+.forgotpassworkclick {
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22.96px;
+  letter-spacing: 0%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.thesigninbtn {
+  border-radius: 16px;
+  padding-top: 16px;
+  padding-right: 19px;
+  padding-bottom: 16px;
+  padding-left: 19px;
+  background: #80ffb5;
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17.08px;
+  letter-spacing: -2%;
+  text-align: center;
+  color: #16291e;
+  width:100%;
+  border: none;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-bottom: 16px;
+}
+
+.forgotpassworkclick span {
+    text-decoration: underline;
+}

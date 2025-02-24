@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
   const updateUserStatus = async (user) => {
     if (!user) return;
 
-    const userRef = ref(db, `users/${user.uid}/status`);
+    const userRef = ref(db, `technician/${user.uid}/status`);
 
     // Set user as online
     await set(userRef, { online: true, lastSeen: Date.now() });
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         const role = await getUserRole(user.uid);
 
-        if (role !== "user") {
+        if (role !== "technician") {
           await signOut(auth);
           setCurrentUser(null);
         } else {
@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const getUserRole = async (uid) => {
-  const userRef = ref(db, "users/" + uid);
+  const userRef = ref(db, "technician/" + uid);
   const snapshot = await get(userRef);
   return snapshot.exists() ? snapshot.val().role : null;
 };
@@ -68,7 +68,7 @@ export const signInWithSocial = async (provider) => {
   try {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-    const userRef = ref(db, "users/" + user.uid);
+    const userRef = ref(db, "technician/" + user.uid);
     const snapshot = await get(userRef);
 
     if (!snapshot.exists()) {
@@ -78,9 +78,9 @@ export const signInWithSocial = async (provider) => {
         formCompleted: false,
         role: "user",
       });
-    } else if (snapshot.val().role !== "user") {
+    } else if (snapshot.val().role !== "technician") {
       await signOut(auth);
-      return { error: "Only users can sign in." };
+      return { error: "Only Technician can sign in." };
     }
 
     return { user };
