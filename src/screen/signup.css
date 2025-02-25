@@ -28,6 +28,7 @@
 
 .inputcnt {
   display: grid;
+  width: 100%;
   gap: 5px;
 }
 
@@ -40,7 +41,7 @@
   color: #000000;
 }
 
-.inputcnt input {
+.inputcnt input, .inputcnt select {
   border: 1px solid #dcdcdc;
   padding: 16px 17px;
   margin-bottom: 20px;
@@ -94,4 +95,20 @@
 
 .forgotpassworkclick span {
     text-decoration: underline;
+}
+
+.signup_dividetime {
+    display: flex;
+    gap: 16px;
+}
+
+.formtitle {
+    font-family: Instrument Sans;
+font-weight: 500;
+font-size: 16px;
+line-height: 26.24px;
+letter-spacing: -2%;
+color: #A2AAA5;
+margin-bottom: 10px;
+
 }

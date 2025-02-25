@@ -35,7 +35,7 @@ function InfopageTwo() {
       if (!user) {
         console.error("No authenticated user found.");
         setLoading(false);
-        navigate("/signup")
+        navigate("/signup");
         return;
       }
 
@@ -173,17 +173,23 @@ function InfopageTwo() {
   }
 
   return (
-    <div style={{ display: "grid", width: 400 }}>
-      <label>Specialization</label>
-      <select onChange={handleCategoryChange} value={selectedCategory}>
-        <option value=''>-- Select a Category --</option>
-        {categories.map((category, index) => (
-          <option key={index} value={category}>
-            {category}
-          </option>
-        ))}
-      </select>
+    <div className='signin_cnt'>
+      <h2 className='signin_title'>Professional Information</h2>
+      <p className='signin_para'>
+        Fill in your expertise, experience, and service preferences.
+      </p>
 
+      <div className='inputcnt'>
+        <label>Specialization</label>
+        <select onChange={handleCategoryChange} value={selectedCategory}>
+          <option value=''>-- Select a Category --</option>
+          {categories.map((category, index) => (
+            <option key={index} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+      </div>
       {selectedCategory && services.length > 0 && (
         <>
           <h2>Select Services</h2>
@@ -213,77 +219,99 @@ function InfopageTwo() {
           </ul>
         </>
       )}
+      <div className='inputcnt'>
+        <label>Years of experience</label>
+        <input
+          type='number'
+          value={expyears}
+          onChange={(e) => setExpyears(e.target.value)}
+        />
+      </div>
+      <p className='formtitle'>Certification</p>
+      <div className='inputcnt'>
+        <input
+          type='text'
+          value={certificateName}
+          placeholder='Enter certificate name'
+          onChange={(e) => setCertificateName(e.target.value)}
+        />
+      </div>
+      <div className='inputcnt'>
+        <input
+          type='text'
+          value={issuingOrganisation}
+          placeholder='Enter Issuing organisation'
+          onChange={(e) => setIssuingOrganisation(e.target.value)}
+        />
+      </div>
+      <div className='inputcnt'>
+        <label htmlFor=''>Issuing date</label>
+        <input
+          type='month'
+          value={monthyear}
+          placeholder='month and year'
+          onChange={(e) => setMonthyear(e.target.value)}
+        />
+      </div>
+      <div className='inputcnt'>
+        <label htmlFor=''>Upload certificate</label>
+        <input
+          type='file'
+          accept='.jpg, .png, .pdf'
+          onChange={(e) => handleFileChange(e, setCertificateFile)}
+        />
+      </div>
+      <p className='formtitle'>Working Hours</p>
 
-      <label>Years of experience</label>
-      <input
-        type='text'
-        value={expyears}
-        onChange={(e) => setExpyears(e.target.value)}
-      />
+      <div className='signup_dividetime'>
+        <div className='inputcnt'>
+          <label htmlFor=''>From</label>
+          <input
+            type='time'
+            value={fromtime}
+            onChange={(e) => setFromTime(e.target.value)}
+          />
+        </div>
+        <div className='inputcnt'>
+          <label htmlFor=''>To</label>
+          <input
+            type='time'
+            value={totime}
+            onChange={(e) => setToTime(e.target.value)}
+          />
+        </div>
+      </div>
 
-      <h2>Certification</h2>
-      <input
-        type='text'
-        value={certificateName}
-        placeholder='Enter certificate name'
-        onChange={(e) => setCertificateName(e.target.value)}
-      />
-      <input
-        type='text'
-        value={issuingOrganisation}
-        placeholder='Enter Issuing organisation'
-        onChange={(e) => setIssuingOrganisation(e.target.value)}
-      />
-      <label htmlFor=''>Issuing date</label>
-      <input
-        type='month'
-        value={monthyear}
-        placeholder='month and year'
-        onChange={(e) => setMonthyear(e.target.value)}
-      />
-      <label htmlFor=''>Upload certificate</label>
-      <input
-        type='file'
-        accept='.jpg, .png, .pdf'
-        onChange={(e) => handleFileChange(e, setCertificateFile)}
-      />
-      <h2>Working Hours</h2>
-      <label htmlFor=''>From</label>
-      <input
-        type='time'
-        value={fromtime}
-        onChange={(e) => setFromTime(e.target.value)}
-      />
-      <label htmlFor=''>To</label>
-      <input
-        type='time'
-        value={totime}
-        onChange={(e) => setToTime(e.target.value)}
-      />
+      <div className='inputcnt'>
+        {" "}
+        <label>Government Issued ID</label>
+        <select
+          value={govissuedid}
+          onChange={(e) => setGovIssuedId(e.target.value)}
+        >
+          <option value=''>Select ID</option>
+          <option value='NIN'>NIN</option>
+          <option value='Passport'>Passport</option>
+        </select>
+      </div>
+      <div className='inputcnt'>
+        {" "}
+        <input
+          type='file'
+          accept='.jpg, .png, .pdf'
+          onChange={(e) => handleFileChange(e, setGovIssuedIdFile)}
+        />
+      </div>
+      <p className='formtitle'>Proof of Address</p>
+      <div className='inputcnt'>
+        <input
+          type='file'
+          accept='.jpg, .png, .pdf'
+          onChange={(e) => handleFileChange(e, setProofAddressFile)}
+        />
+      </div>
 
-      <label>Government Issued ID</label>
-      <select
-        value={govissuedid}
-        onChange={(e) => setGovIssuedId(e.target.value)}
-      >
-        <option value=''>Select ID</option>
-        <option value='NIN'>NIN</option>
-        <option value='Passport'>Passport</option>
-      </select>
-      <input
-        type='file'
-        accept='.jpg, .png, .pdf'
-        onChange={(e) => handleFileChange(e, setGovIssuedIdFile)}
-      />
-
-      <label>Proof of Address</label>
-      <input
-        type='file'
-        accept='.jpg, .png, .pdf'
-        onChange={(e) => handleFileChange(e, setProofAddressFile)}
-      />
-
-      <button onClick={saveDetails} disabled={loading}>
+      <button className='thesigninbtn' onClick={saveDetails} disabled={loading}>
         {loading ? "Saving..." : "Continue"}
       </button>
     </div>
@@ -291,4 +319,3 @@ function InfopageTwo() {
 }
 
 export default InfopageTwo;
- 

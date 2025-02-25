@@ -52,13 +52,13 @@ function SignIn() {
             required
           />
         </div>
-        <p className="forgotpassworkclick">Forgot password?</p>
+        <p className='forgotpassworkclick'>Forgot password?</p>
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type='submit' disabled={loading} className="thesigninbtn">
+        <button type='submit' disabled={loading} className='thesigninbtn'>
           {loading ? "Signing in..." : "Sign In"}
         </button>
       </form>
-      <p className="forgotpassworkclick">
+      <p className='forgotpassworkclick'>
         Don't have an account ?{" "}
         <span onClick={() => navigate("/signup")}>Sign up</span>
       </p>
