@@ -1,0 +1,120 @@
+.notver {
+  background: #0000004d;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notaprv_cnt {
+  max-width: 358px;
+  gap: 30px;
+  padding: 10px;
+  margin: auto auto;
+  background-color: #fff;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.botaprvv_cert {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.botarvtitle {
+  font-family: Instrument Sans;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -1%;
+  color: #16291e;
+  margin-bottom: 20px;
+}
+
+.botarvname {
+  font-family: Instrument Sans;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 22px;
+  letter-spacing: -1%;
+  color: #16291e;
+}
+
+.botarvemail {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: -1%;
+  color: #a2aaa5;
+  margin-bottom: 20px;
+}
+
+.bovaprvdet {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bovaprvdetstatus {
+  border: 1px solid #dead4d;
+  background: #ffc14526;
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 13.2px;
+  letter-spacing: -1%;
+  color: #dead4d;
+}
+
+.bovaprvdettitle {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 15.4px;
+  letter-spacing: -1%;
+  color: #16291e;
+}
+
+.dcarptext {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24.8px;
+  letter-spacing: -1%;
+  color: #16291e;
+  margin-bottom: 10px;
+}
+
+.dcarptext span {
+  font-family: Instrument Sans;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24.8px;
+  letter-spacing: -1%;
+  color: #16291e;
+}
+
+.cntdevns {
+  background: #80ffb5;
+  width: 100%;
+
+  padding: 18px 19px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17.08px;
+  letter-spacing: -2%;
+  color: #16291e;
+}

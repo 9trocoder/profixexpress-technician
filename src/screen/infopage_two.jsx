@@ -7,6 +7,7 @@ import {
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
+import "./dashboard.css";
 
 function InfopageTwo() {
   const [categories, setCategories] = useState([]);
