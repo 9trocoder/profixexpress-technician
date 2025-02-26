@@ -1,12 +1,7 @@
 
 
 
-.techdash {
-  display: flex;
-  flex-direction: column;
-  height: 100vh; /* Full viewport height */
-  overflow: hidden;
-}
+
 
 .techdashtop {
   position: sticky; /* Fix at the top */
@@ -143,12 +138,10 @@
 }
 
 .techdash {
-  position: relative;
   max-width: 500px;
   margin: 0 auto;
   padding: 16px;
   background-color: #fafafa;
-  height: 100vh;
 }
 
 .techdashgreet {
@@ -423,7 +416,7 @@
 }
 
 .thecontentbd {
-  display: grid;
+  /* display: grid; */
   /* overflow-y: scroll;
   height: 60vh; */
 }
