@@ -4,6 +4,9 @@ import { auth, db, get, ref } from "../utilities/firebaseConfig";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import verbg from "../assets/unverifiedbg.png";
+import ttime from "../assets/ttime.svg";
+import tcalendar from "../assets/tcalendar.svg";
+import tlocation from "../assets/tlocation.svg";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -58,19 +61,66 @@ function Dashboard() {
           </div>
 
           <div className='botbuttom'>
-            <p className="dcarptext">
+            <p className='dcarptext'>
               Technician ID is yet to be generated as your application is
               currently under review to see if you are a good fit, we'll send an
-              email to <span>{userData.email}</span>  once your application is successfull
+              email to <span>{userData.email}</span> once your application is
+              successfull
             </p>
-            <button className="cntdevns" onClick={handleSignOut}>Sign Out</button>
+            <button className='cntdevns' onClick={handleSignOut}>
+              Sign Out
+            </button>
           </div>
         </div>
       </div>
     );
   return (
     <div>
-      <h2>Welcome to the Dashboard</h2>
+      <h2>Hi {userData.fullName}</h2>
+      <p>You have 1 pending task and 3 tasks to complete</p>
+      <label htmlFor=''>Pending Tasks</label>
+      <div className=''>
+        <p>Pipe Repair</p>
+        <p>Hi, I need help fixing a leaking faucet in my kitchen</p>
+        <div className='divider'></div>
+        <div className=''>
+          <div className=''>
+            <img src={tcalendar} alt='' srcset='' />
+            <label htmlFor=''>Sun, Nov 25, 2024.</label>
+          </div>
+          <div className=''>
+            <img src={ttime} alt='' srcset='' />
+            <label htmlFor=''>9:30 Am. 1hr</label>
+          </div>
+          <div className=''>
+            <img src={tlocation} alt='' srcset='' />
+            <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
+          </div>
+        </div>
+      </div>
+      <label htmlFor="">Active Tasks</label>
+      <div className="">
+        <p>House Cleaning</p>
+        <p>Hi, I need help fixing a leaking faucet in my kitchen...</p>
+        <div className="divider"></div>
+        <div className="">
+          <div className="">
+          <label htmlFor="">Booked date</label>
+          <div className="">
+            <img src={tcalendar} alt="" srcset="" />
+            <p>Nov 25, 2024</p>
+          </div>
+        </div>
+        <div className="">
+          <label htmlFor="">Due</label>
+          <div className="">
+            <img src={tcalendar} alt="" srcset="" />
+            <p>Nov 25, 2024</p>
+          </div>
+        </div>
+        </div>
+        
+      </div>
       <p>
         <strong>Name:</strong> {userData.fullName}
       </p>
