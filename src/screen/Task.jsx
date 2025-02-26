@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import filtericon from "../assets/filtericon.svg";
+import ttime from "../assets/ttime.svg";
+import tcalendar from "../assets/tcalendar.svg";
+import tlocation from "../assets/tlocation.svg";
 
 export const taskbtnlist = [
   {
@@ -43,6 +46,57 @@ function Task() {
             {tasktype.name}
           </button>
         ))}
+      </div>
+
+      <p className='taskpropss'>{activenav} Task</p>
+      <div className='taskalertmain'>
+        <p className='tasktitle'>Pipe Repair</p>
+        <p className='taskparam'>
+          Hi, I need help fixing a leaking faucet in my kitchen
+        </p>
+        <div className='divider'></div>
+        <div className='taskprops'>
+          <div className='taskpropsitem'>
+            <img src={tcalendar} alt='' srcset='' />
+            <label htmlFor=''>Sun, Nov 25, 2024.</label>
+          </div>
+          <div className='taskpropsitem'>
+            <img src={ttime} alt='' srcset='' />
+            <label htmlFor=''>9:30 Am. 1hr</label>
+          </div>
+          <div className='taskpropsitem'>
+            <img src={tlocation} alt='' srcset='' />
+            <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
+          </div>
+        </div>
+        <div className='taskpropsbtn'>
+          <button className='tpbaccept'>View Task Details</button>
+        </div>
+      </div>
+      <div className='thespace'></div>
+      <div className='taskalertmain'>
+        <p className='tasktitle'>Ac maintenance and repair.</p>
+        <p className='taskparam'>
+          Hi, I need help fixing a leaking faucet in my kitchen
+        </p>
+        <div className='divider'></div>
+        <div className='taskprops'>
+          <div className='taskpropsitem'>
+            <img src={tcalendar} alt='' srcset='' />
+            <label htmlFor=''>Sun, Nov 2, 2024.</label>
+          </div>
+          <div className='taskpropsitem'>
+            <img src={ttime} alt='' srcset='' />
+            <label htmlFor=''>9:30 Am. 1hr</label>
+          </div>
+          <div className='taskpropsitem'>
+            <img src={tlocation} alt='' srcset='' />
+            <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
+          </div>
+        </div>
+        <div className='taskpropsbtn'>
+          <button className='tpbaccept'>View Task Details</button>
+        </div>
       </div>
     </div>
   );
