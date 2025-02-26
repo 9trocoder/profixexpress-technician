@@ -335,7 +335,7 @@
 
 .tasksearch {
   margin-top: 20px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   display: flex;
   gap: 10px;
   align-items: center;
@@ -367,4 +367,26 @@
   border: none;
   border-radius: 16px;
   cursor: pointer;
+}
+
+.tasknav {
+  display: flex;
+  gap: 8px;
+}
+
+.tasknavitem {
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 17.6px;
+  letter-spacing: -1%;
+  padding: 7px 10px;
+  background: #e4e7e5;
+  border: none;
+  cursor: pointer;
+}
+
+.tasktypeactive {
+  background-color: #16291e;
+  color: #fff;
 }
