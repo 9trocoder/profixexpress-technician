@@ -159,7 +159,7 @@
   left: 50%;
   transform: translate(-50%, 50%);
   margin: 0 auto;
-max-width: 450px;
+  max-width: 450px;
   z-index: 11;
 }
 
