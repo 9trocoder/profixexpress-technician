@@ -131,9 +131,9 @@ function Dashboard() {
             <div className='modal'>
               <div className='taskalertmain'>
                 <div className='taskalertmainpro'>
-                  <h2 className="tmptitle">Success!</h2>
-                  <p className="tmpsubtitle">You have accepted this booking</p>
-                  <p className="tmppara">
+                  <h2 className='tmptitle'>Success!</h2>
+                  <p className='tmpsubtitle'>You have accepted this booking</p>
+                  <p className='tmppara'>
                     You've successfully accepted the task. Click below to view
                     the full details and proceed. We look forward to your
                     excellent work!
@@ -220,6 +220,7 @@ function Dashboard() {
         <p>
           <strong>Phone:</strong> {userData.mobile}
         </p>
+        <button onClick={() => navigate("/task")}>go to task</button>
         <button onClick={handleSignOut}>Sign Out</button>
       </div>
     </>

@@ -14,6 +14,7 @@ import Dashboard from "./screen/Dashboard";
 import Authpage from "./screen/authpage";
 import PrivateRoute from "./utilities/ProtectedRoute";
 import SignIn from "./screen/SignIn";
+import Task from "./screen/Task";
 
 const googleMapsApiKey = "AIzaSyCeirrtXS_SjOfBcSX_-uetXg0jtsawF-s";
 
@@ -33,6 +34,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path='/task' element={<Task />} />
       </Routes>
     </Router>
   );
