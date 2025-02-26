@@ -13,6 +13,7 @@ function Dashboard() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [active, setActive] = useState(true);
+  const [acceptedtsk, setAcceptedtsk] = useState(false);
   useEffect(() => {
     // Check if a user is logged in
     const fetchUserData = async () => {
@@ -31,6 +32,11 @@ function Dashboard() {
 
     fetchUserData();
   }, []);
+
+  const handleaccept = () => {
+    setAcceptedtsk(true);
+    setActive(false);
+  };
 
   const handleSignOut = async () => {
     try {
@@ -104,10 +110,7 @@ function Dashboard() {
                   </div>
                 </div>
                 <div className='taskpropsbtn'>
-                  <button
-                    className='tpbaccept'
-                    onClick={() => setActive(false)}
-                  >
+                  <button className='tpbaccept' onClick={handleaccept}>
                     Accept
                   </button>
                   <button
@@ -116,6 +119,35 @@ function Dashboard() {
                   >
                     Decline
                   </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+      {acceptedtsk && (
+        <>
+          <div className='modal-overlay'>
+            <div className='modal'>
+              <div className='taskalertmain'>
+                <div className='taskalertmainpro'>
+                  <h2 className="tmptitle">Success!</h2>
+                  <p className="tmpsubtitle">You have accepted this booking</p>
+                  <p className="tmppara">
+                    You've successfully accepted the task. Click below to view
+                    the full details and proceed. We look forward to your
+                    excellent work!
+                  </p>
+                  <div className='taskpropsbtn'>
+                    <button
+                      className='tpbaccept'
+                      onClick={() => {
+                        setAcceptedtsk(false);
+                      }}
+                    >
+                      Proceed to Task Details
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -178,7 +210,7 @@ function Dashboard() {
             </div>
           </div>
         </div>
-        <div className="thsp"></div>
+        <div className='thsp'></div>
         <p>
           <strong>Name:</strong> {userData.fullName}
         </p>
