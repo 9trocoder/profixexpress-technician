@@ -80,7 +80,6 @@ function Dashboard() {
       {active && (
         <>
           <div className='modal-overlay'>
-            {" "}
             <div className='modal'>
               <div className='taskalertmain'>
                 <p className='tasktitle'>Pipe Repair</p>
@@ -130,30 +129,34 @@ function Dashboard() {
           You have 1 pending task and 3 tasks to complete
         </p>
 
-        <label htmlFor=''>Pending Tasks</label>
-        <div className=''>
-          <p>Pipe Repair</p>
-          <p>Hi, I need help fixing a leaking faucet in my kitchen</p>
+        <p className="taskpropss">Pending Tasks</p>
+        <div className='taskalertmain'>
+          <p className="tasktitle">Pipe Repair</p>
+          <p className="taskparam">Hi, I need help fixing a leaking faucet in my kitchen</p>
           <div className='divider'></div>
-          <div className=''>
-            <div className=''>
+          <div className='taskprops'>
+            <div className='taskpropsitem'>
               <img src={tcalendar} alt='' srcset='' />
               <label htmlFor=''>Sun, Nov 25, 2024.</label>
             </div>
-            <div className=''>
+            <div className='taskpropsitem'>
               <img src={ttime} alt='' srcset='' />
               <label htmlFor=''>9:30 Am. 1hr</label>
             </div>
-            <div className=''>
+            <div className='taskpropsitem'>
               <img src={tlocation} alt='' srcset='' />
               <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
             </div>
+
+          </div>
+          <div className="taskpropsbtn">
+            <button className='tpbaccept'>View Task Details</button>
           </div>
         </div>
-        <label htmlFor=''>Active Tasks</label>
-        <div className=''>
-          <p>House Cleaning</p>
-          <p>Hi, I need help fixing a leaking faucet in my kitchen...</p>
+        <p className="taskpropss">Active Tasks</p>
+        <div className='taskalertmain'>
+          <p className="tasktitle">House Cleaning</p>
+          <p className="taskparam">Hi, I need help fixing a leaking faucet in my kitchen...</p>
           <div className='divider'></div>
           <div className=''>
             <div className=''>

@@ -141,7 +141,7 @@
   line-height: 24.8px;
   letter-spacing: -1%;
   color: #16291e;
-  margin-bottom: 20px;
+  
 }
 
 /* Overlay to darken background */
@@ -245,4 +245,15 @@
 .tpbdecline {
   border: 1px solid #16291e;
   background-color: #fff;
+}
+
+.taskpropss {
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24.8px;
+  letter-spacing: -1%;
+  color: #16291e;
+  padding-bottom: 15px;
+  margin-top: 25px;
 }
