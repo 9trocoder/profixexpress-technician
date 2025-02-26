@@ -76,96 +76,104 @@ function Dashboard() {
       </div>
     );
   return (
-    <div className='techdash'>
-      <h2 className='techdashgreet'>Hi {userData.fullName}</h2>
-      <p className='techdashpar'>
-        You have 1 pending task and 3 tasks to complete
-      </p>
+    <>
       {active && (
         <>
           <div className='taskalertcntoverlay'></div>
           <div className='taskalertcntbody'>
-            <label htmlFor=''>Pending Tasks</label>
             <div className=''>
-              <p>Pipe Repair</p>
-              <p>Hi, I need help fixing a leaking faucet in my kitchen</p>
+              <p className='tasktitle'>Pipe Repair</p>
+              <p className='taskparam'>
+                Hi, I need help fixing a leaking faucet in my kitchen
+              </p>
               <div className='divider'></div>
-              <div className=''>
-                <div className=''>
+              <div className='taskprops'>
+                <div className='taskpropsitem'>
                   <img src={tcalendar} alt='' srcset='' />
                   <label htmlFor=''>Sun, Nov 25, 2024.</label>
                 </div>
-                <div className=''>
+                <div className='taskpropsitem'>
                   <img src={ttime} alt='' srcset='' />
                   <label htmlFor=''>9:30 Am. 1hr</label>
                 </div>
-                <div className=''>
+                <div className='taskpropsitem'>
                   <img src={tlocation} alt='' srcset='' />
                   <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
                 </div>
               </div>
-              <div className=''>
-                <button>Accept</button>
-                <button>Decline</button>
+              <div className='taskpropsbtn'>
+                <button className='tpbaccept' onClick={() => setActive(false)}>
+                  Accept
+                </button>
+                <button className='tpbdecline' onClick={() => setActive(false)}>
+                  Decline
+                </button>
               </div>
             </div>
           </div>
         </>
       )}
 
-      <label htmlFor=''>Pending Tasks</label>
-      <div className=''>
-        <p>Pipe Repair</p>
-        <p>Hi, I need help fixing a leaking faucet in my kitchen</p>
-        <div className='divider'></div>
+      <div className='techdash'>
+        <h2 className='techdashgreet'>Hi {userData.fullName}</h2>
+        <p className='techdashpar'>
+          You have 1 pending task and 3 tasks to complete
+        </p>
+
+        <label htmlFor=''>Pending Tasks</label>
         <div className=''>
+          <p>Pipe Repair</p>
+          <p>Hi, I need help fixing a leaking faucet in my kitchen</p>
+          <div className='divider'></div>
           <div className=''>
-            <img src={tcalendar} alt='' srcset='' />
-            <label htmlFor=''>Sun, Nov 25, 2024.</label>
-          </div>
-          <div className=''>
-            <img src={ttime} alt='' srcset='' />
-            <label htmlFor=''>9:30 Am. 1hr</label>
-          </div>
-          <div className=''>
-            <img src={tlocation} alt='' srcset='' />
-            <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
-          </div>
-        </div>
-      </div>
-      <label htmlFor=''>Active Tasks</label>
-      <div className=''>
-        <p>House Cleaning</p>
-        <p>Hi, I need help fixing a leaking faucet in my kitchen...</p>
-        <div className='divider'></div>
-        <div className=''>
-          <div className=''>
-            <label htmlFor=''>Booked date</label>
             <div className=''>
               <img src={tcalendar} alt='' srcset='' />
-              <p>Nov 25, 2024</p>
+              <label htmlFor=''>Sun, Nov 25, 2024.</label>
             </div>
-          </div>
-          <div className=''>
-            <label htmlFor=''>Due</label>
             <div className=''>
-              <img src={tcalendar} alt='' srcset='' />
-              <p>Nov 25, 2024</p>
+              <img src={ttime} alt='' srcset='' />
+              <label htmlFor=''>9:30 Am. 1hr</label>
+            </div>
+            <div className=''>
+              <img src={tlocation} alt='' srcset='' />
+              <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
             </div>
           </div>
         </div>
+        <label htmlFor=''>Active Tasks</label>
+        <div className=''>
+          <p>House Cleaning</p>
+          <p>Hi, I need help fixing a leaking faucet in my kitchen...</p>
+          <div className='divider'></div>
+          <div className=''>
+            <div className=''>
+              <label htmlFor=''>Booked date</label>
+              <div className=''>
+                <img src={tcalendar} alt='' srcset='' />
+                <p>Nov 25, 2024</p>
+              </div>
+            </div>
+            <div className=''>
+              <label htmlFor=''>Due</label>
+              <div className=''>
+                <img src={tcalendar} alt='' srcset='' />
+                <p>Nov 25, 2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>
+          <strong>Name:</strong> {userData.fullName}
+        </p>
+        <p>
+          <strong>Email:</strong> {userData.email}
+        </p>
+        <p>
+          <strong>Phone:</strong> {userData.mobile}
+        </p>
+        <button onClick={handleSignOut}>Sign Out</button>
       </div>
-      <p>
-        <strong>Name:</strong> {userData.fullName}
-      </p>
-      <p>
-        <strong>Email:</strong> {userData.email}
-      </p>
-      <p>
-        <strong>Phone:</strong> {userData.mobile}
-      </p>
-      <button onClick={handleSignOut}>Sign Out</button>
-    </div>
+    </>
   );
 }
 

@@ -155,11 +155,90 @@
 }
 
 .taskalertcntbody {
-  position: relative;
+  position: fixed;
   max-width: 350px;
+  left: 50%;
+  transform: translate(-50%, 50%);
   margin: 0 auto;
   background-color: #fff;
   z-index: 11;
   padding: 16px;
   border-radius: 12px;
+}
+
+.tasktitle {
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 17.6px;
+  letter-spacing: -1%;
+  color: #16291e;
+  margin-bottom: 10px;
+}
+
+.taskparam {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16.8px;
+  letter-spacing: -1%;
+  color: #555555;
+}
+
+.divider {
+  margin: 15px 0;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.taskprops {
+  display: grid;
+  grid-gap: 10px;
+  margin-bottom: 20px;
+}
+
+.taskpropsitem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.taskpropsitem img {
+  width: 16px;
+}
+
+.taskpropsitem label {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16.4px;
+  letter-spacing: -2%;
+  color: #7f8983;
+}
+
+.taskpropsbtn {
+  display: flex;
+  gap: 16px;
+}
+
+.taskpropsbtn button {
+  width: 100%;
+  padding: 18px 19px;
+  border-radius: 16px;
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19.52px;
+  letter-spacing: -2%;
+  color: #16291e;
+  cursor: pointer;
+}
+
+.tpbaccept {
+  background: #80ffb5;
+  border: 1px solid #80ffb5;
+}
+
+.tpbdecline {
+  border: 1px solid #16291e;
+  background-color: #fff;
 }
