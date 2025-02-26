@@ -81,10 +81,10 @@ function Dashboard() {
         <>
           <div className='taskalertcntoverlay'></div>
           <div className='taskalertcntbody'>
-            <div className=''>
+            <div className='taskalertmain'>
               <p className='tasktitle'>Pipe Repair</p>
               <p className='taskparam'>
-                Hi, I need help fixing a leaking faucet in my kitchen
+                Hi, I need help fixing a leaking faucet in my kitchen, kindly come now because it is an emergency. it needs to be fixed immediately
               </p>
               <div className='divider'></div>
               <div className='taskprops'>

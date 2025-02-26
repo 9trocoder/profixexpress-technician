@@ -156,14 +156,18 @@
 
 .taskalertcntbody {
   position: fixed;
-  max-width: 350px;
   left: 50%;
   transform: translate(-50%, 50%);
   margin: 0 auto;
-  background-color: #fff;
+max-width: 450px;
   z-index: 11;
+}
+
+.taskalertmain {
   padding: 16px;
   border-radius: 12px;
+  background-color: #fff;
+  margin: 0 16px;
 }
 
 .tasktitle {
