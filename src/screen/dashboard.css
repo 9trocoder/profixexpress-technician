@@ -332,3 +332,17 @@
   text-align: center;
   color: #16291e;
 }
+
+
+.tasksearch {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.filterbtn {
+  display: flex;
+  align-items: center;
+  height: 62px;
+  
+}
