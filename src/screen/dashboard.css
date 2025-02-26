@@ -333,16 +333,38 @@
   color: #16291e;
 }
 
-
 .tasksearch {
+  margin-top: 20px;
+  margin-bottom: 16px;
   display: flex;
   gap: 10px;
   align-items: center;
 }
 
+.tasksearch input {
+  width: 100%;
+  border: 1px solid #a2aaa5;
+  padding: 16px 21px;
+  border-radius: 16px;
+  background-color: transparent;
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17.08px;
+  letter-spacing: -2%;
+  outline: none;
+}
+
+.tasksearch input::placeholder {
+  color: #a2aaa5;
+}
+
 .filterbtn {
   display: flex;
   align-items: center;
-  height: 62px;
-  
+  background: #80ffb5;
+  padding: 14px 19px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
 }
