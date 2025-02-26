@@ -27,80 +27,82 @@ function Task() {
   const [activenav, setActivena] = useState("All");
   return (
     <div className='techdash'>
-      <h2 className='techdashgreet'>Task</h2>
-      <div className='tasksearch'>
-        <input type='text' placeholder='Search here...' />
-        <button className='filterbtn'>
-          <img src={filtericon} alt='' srcSet='' />
-        </button>
-      </div>
-      <div className='tasknav'>
-        {taskbtnlist.map((tasktype) => (
-          <button
-            key={tasktype.id}
-            onClick={() => setActivena(tasktype.name)}
-            className={`tasknavitem ${
-              activenav === tasktype.name && "tasktypeactive"
-            }`}
-          >
-            {tasktype.name}
+      <div className='techdashtop'>
+        <h2 className='techdashgreet'>Task</h2>
+        <div className='tasksearch'>
+          <input type='text' placeholder='Search here...' />
+          <button className='filterbtn'>
+            <img src={filtericon} alt='' srcSet='' />
           </button>
-        ))}
+        </div>
+        <div className='tasknav'>
+          {taskbtnlist.map((tasktype) => (
+            <button
+              key={tasktype.id}
+              onClick={() => setActivena(tasktype.name)}
+              className={`tasknavitem ${
+                activenav === tasktype.name && "tasktypeactive"
+              }`}
+            >
+              {tasktype.name}
+            </button>
+          ))}
+        </div>
+
+        <p className='taskpropss'>{activenav} Task</p>
       </div>
 
-      <p className='taskpropss'>{activenav} Task</p>
-      <div className="thecontentbd">
-         <div className='taskalertmain'>
-        <p className='tasktitle'>Pipe Repair</p>
-        <p className='taskparam'>
-          Hi, I need help fixing a leaking faucet in my kitchen
-        </p>
-        <div className='divider'></div>
-        <div className='taskprops'>
-          <div className='taskpropsitem'>
-            <img src={tcalendar} alt='' srcset='' />
-            <label htmlFor=''>Sun, Nov 25, 2024.</label>
+      <div className='thecontentbd'>
+        <div className='taskalertmain'>
+          <p className='tasktitle'>Pipe Repair</p>
+          <p className='taskparam'>
+            Hi, I need help fixing a leaking faucet in my kitchen
+          </p>
+          <div className='divider'></div>
+          <div className='taskprops'>
+            <div className='taskpropsitem'>
+              <img src={tcalendar} alt='' srcset='' />
+              <label htmlFor=''>Sun, Nov 25, 2024.</label>
+            </div>
+            <div className='taskpropsitem'>
+              <img src={ttime} alt='' srcset='' />
+              <label htmlFor=''>9:30 Am. 1hr</label>
+            </div>
+            <div className='taskpropsitem'>
+              <img src={tlocation} alt='' srcset='' />
+              <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
+            </div>
           </div>
-          <div className='taskpropsitem'>
-            <img src={ttime} alt='' srcset='' />
-            <label htmlFor=''>9:30 Am. 1hr</label>
-          </div>
-          <div className='taskpropsitem'>
-            <img src={tlocation} alt='' srcset='' />
-            <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
+          <div className='taskpropsbtn'>
+            <button className='tpbaccept'>View Task Details</button>
           </div>
         </div>
-        <div className='taskpropsbtn'>
-          <button className='tpbaccept'>View Task Details</button>
+        <div className='thespace'></div>
+        <div className='taskalertmain'>
+          <p className='tasktitle'>Ac maintenance and repair.</p>
+          <p className='taskparam'>
+            Hi, I need help fixing a leaking faucet in my kitchen
+          </p>
+          <div className='divider'></div>
+          <div className='taskprops'>
+            <div className='taskpropsitem'>
+              <img src={tcalendar} alt='' srcset='' />
+              <label htmlFor=''>Sun, Nov 2, 2024.</label>
+            </div>
+            <div className='taskpropsitem'>
+              <img src={ttime} alt='' srcset='' />
+              <label htmlFor=''>9:30 Am. 1hr</label>
+            </div>
+            <div className='taskpropsitem'>
+              <img src={tlocation} alt='' srcset='' />
+              <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
+            </div>
+          </div>
+          <div className='taskpropsbtn'>
+            <button className='tpbaccept'>View Task Details</button>
+          </div>
         </div>
       </div>
-      <div className='thespace'></div>
-      <div className='taskalertmain'>
-        <p className='tasktitle'>Ac maintenance and repair.</p>
-        <p className='taskparam'>
-          Hi, I need help fixing a leaking faucet in my kitchen
-        </p>
-        <div className='divider'></div>
-        <div className='taskprops'>
-          <div className='taskpropsitem'>
-            <img src={tcalendar} alt='' srcset='' />
-            <label htmlFor=''>Sun, Nov 2, 2024.</label>
-          </div>
-          <div className='taskpropsitem'>
-            <img src={ttime} alt='' srcset='' />
-            <label htmlFor=''>9:30 Am. 1hr</label>
-          </div>
-          <div className='taskpropsitem'>
-            <img src={tlocation} alt='' srcset='' />
-            <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
-          </div>
-        </div>
-        <div className='taskpropsbtn'>
-          <button className='tpbaccept'>View Task Details</button>
-        </div>
-      </div>
-      </div>
-     
     </div>
   );
 }

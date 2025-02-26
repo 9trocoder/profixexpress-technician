@@ -1,3 +1,26 @@
+
+
+
+.techdash {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden;
+}
+
+.techdashtop {
+  position: sticky; /* Fix at the top */
+  top: 0;
+  background-color: #fafafa;
+  z-index: 100;
+}
+
+.thecontentbd {
+  flex-grow: 1;
+  overflow-y: auto; /* Enable scrolling */
+  height: calc(100vh - 80px); /* Adjust based on techdashtop height */
+}
+
 .notver {
   background: #0000004d;
   height: 100vh;
@@ -120,6 +143,7 @@
 }
 
 .techdash {
+  position: relative;
   max-width: 500px;
   margin: 0 auto;
   padding: 16px;
@@ -341,6 +365,7 @@
   align-items: center;
 }
 
+
 .tasksearch input {
   width: 100%;
   border: 1px solid #a2aaa5;
@@ -398,6 +423,6 @@
 
 .thecontentbd {
   display: grid;
-  overflow-y: scroll;
-  height: 60vh;
+  /* overflow-y: scroll;
+  height: 60vh; */
 }
