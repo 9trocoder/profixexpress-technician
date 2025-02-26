@@ -79,35 +79,45 @@ function Dashboard() {
     <>
       {active && (
         <>
-          <div className='taskalertcntoverlay'></div>
-          <div className='taskalertcntbody'>
-            <div className='taskalertmain'>
-              <p className='tasktitle'>Pipe Repair</p>
-              <p className='taskparam'>
-                Hi, I need help fixing a leaking faucet in my kitchen, kindly come now because it is an emergency. it needs to be fixed immediately
-              </p>
-              <div className='divider'></div>
-              <div className='taskprops'>
-                <div className='taskpropsitem'>
-                  <img src={tcalendar} alt='' srcset='' />
-                  <label htmlFor=''>Sun, Nov 25, 2024.</label>
+          <div className='modal-overlay'>
+            {" "}
+            <div className='modal'>
+              <div className='taskalertmain'>
+                <p className='tasktitle'>Pipe Repair</p>
+                <p className='taskparam'>
+                  Hi, I need help fixing a leaking faucet in my kitchen, kindly
+                  come now because it is an emergency. it needs to be fixed
+                  immediately
+                </p>
+                <div className='divider'></div>
+                <div className='taskprops'>
+                  <div className='taskpropsitem'>
+                    <img src={tcalendar} alt='' srcset='' />
+                    <label htmlFor=''>Sun, Nov 25, 2024.</label>
+                  </div>
+                  <div className='taskpropsitem'>
+                    <img src={ttime} alt='' srcset='' />
+                    <label htmlFor=''>9:30 Am. 1hr</label>
+                  </div>
+                  <div className='taskpropsitem'>
+                    <img src={tlocation} alt='' srcset='' />
+                    <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
+                  </div>
                 </div>
-                <div className='taskpropsitem'>
-                  <img src={ttime} alt='' srcset='' />
-                  <label htmlFor=''>9:30 Am. 1hr</label>
+                <div className='taskpropsbtn'>
+                  <button
+                    className='tpbaccept'
+                    onClick={() => setActive(false)}
+                  >
+                    Accept
+                  </button>
+                  <button
+                    className='tpbdecline'
+                    onClick={() => setActive(false)}
+                  >
+                    Decline
+                  </button>
                 </div>
-                <div className='taskpropsitem'>
-                  <img src={tlocation} alt='' srcset='' />
-                  <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
-                </div>
-              </div>
-              <div className='taskpropsbtn'>
-                <button className='tpbaccept' onClick={() => setActive(false)}>
-                  Accept
-                </button>
-                <button className='tpbdecline' onClick={() => setActive(false)}>
-                  Decline
-                </button>
               </div>
             </div>
           </div>
