@@ -129,10 +129,12 @@ function Dashboard() {
           You have 1 pending task and 3 tasks to complete
         </p>
 
-        <p className="taskpropss">Pending Tasks</p>
+        <p className='taskpropss'>Pending Tasks</p>
         <div className='taskalertmain'>
-          <p className="tasktitle">Pipe Repair</p>
-          <p className="taskparam">Hi, I need help fixing a leaking faucet in my kitchen</p>
+          <p className='tasktitle'>Pipe Repair</p>
+          <p className='taskparam'>
+            Hi, I need help fixing a leaking faucet in my kitchen
+          </p>
           <div className='divider'></div>
           <div className='taskprops'>
             <div className='taskpropsitem'>
@@ -147,34 +149,36 @@ function Dashboard() {
               <img src={tlocation} alt='' srcset='' />
               <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
             </div>
-
           </div>
-          <div className="taskpropsbtn">
+          <div className='taskpropsbtn'>
             <button className='tpbaccept'>View Task Details</button>
           </div>
         </div>
-        <p className="taskpropss">Active Tasks</p>
+        <p className='taskpropss'>Active Tasks</p>
         <div className='taskalertmain'>
-          <p className="tasktitle">House Cleaning</p>
-          <p className="taskparam">Hi, I need help fixing a leaking faucet in my kitchen...</p>
+          <p className='tasktitle'>House Cleaning</p>
+          <p className='taskparam'>
+            Hi, I need help fixing a leaking faucet in my kitchen...
+          </p>
           <div className='divider'></div>
-          <div className=''>
+          <div className='taskbookdatecnt'>
             <div className=''>
-              <label htmlFor=''>Booked date</label>
-              <div className=''>
+              <p className='taskbookdat'>Booked date</p>
+              <div className='taskbookcd'>
                 <img src={tcalendar} alt='' srcset='' />
                 <p>Nov 25, 2024</p>
               </div>
             </div>
             <div className=''>
-              <label htmlFor=''>Due</label>
-              <div className=''>
+              <p className='taskbookdat'>Due</p>
+              <div className='taskbookcd'>
                 <img src={tcalendar} alt='' srcset='' />
                 <p>Nov 25, 2024</p>
               </div>
             </div>
           </div>
         </div>
+        <div className="thsp"></div>
         <p>
           <strong>Name:</strong> {userData.fullName}
         </p>

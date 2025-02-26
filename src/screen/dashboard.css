@@ -257,3 +257,45 @@
   padding-bottom: 15px;
   margin-top: 25px;
 }
+
+
+.taskbookdatecnt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.taskbookdat {
+  font-family: Instrument Sans;
+font-weight: 400;
+font-size: 14px;
+line-height: 19.6px;
+letter-spacing: -1%;
+color: #16291E;
+
+}
+
+.taskbookcd {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.taskbookcd img{
+  width: 20px;
+}
+
+.taskbookcd p {
+  font-family: Instrument Sans;
+font-weight: 400;
+font-size: 14px;
+line-height: 16.8px;
+letter-spacing: -1%;
+color: #A2AAA5;
+
+}
+
+.thsp {
+  margin-top: 50px;
+}
