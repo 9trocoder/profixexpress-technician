@@ -49,7 +49,8 @@ function Task() {
       </div>
 
       <p className='taskpropss'>{activenav} Task</p>
-      <div className='taskalertmain'>
+      <div className="thecontentbd">
+         <div className='taskalertmain'>
         <p className='tasktitle'>Pipe Repair</p>
         <p className='taskparam'>
           Hi, I need help fixing a leaking faucet in my kitchen
@@ -98,6 +99,8 @@ function Task() {
           <button className='tpbaccept'>View Task Details</button>
         </div>
       </div>
+      </div>
+     
     </div>
   );
 }
