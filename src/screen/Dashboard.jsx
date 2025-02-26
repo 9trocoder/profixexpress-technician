@@ -12,6 +12,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [active, setActive] = useState(true);
   useEffect(() => {
     // Check if a user is logged in
     const fetchUserData = async () => {
@@ -75,37 +76,43 @@ function Dashboard() {
       </div>
     );
   return (
-    <div className="techdash">
-      <h2 className="techdashgreet">Hi {userData.fullName}</h2>
-      <p className="techdashpar">You have 1 pending task and 3 tasks to complete</p>
-      <div className='taskalertcntoverlay'>
-        <div className='taskalertcntbody'>
-          <label htmlFor=''>Pending Tasks</label>
-          <div className=''>
-            <p>Pipe Repair</p>
-            <p>Hi, I need help fixing a leaking faucet in my kitchen</p>
-            <div className='divider'></div>
+    <div className='techdash'>
+      <h2 className='techdashgreet'>Hi {userData.fullName}</h2>
+      <p className='techdashpar'>
+        You have 1 pending task and 3 tasks to complete
+      </p>
+      {active && (
+        <>
+          <div className='taskalertcntoverlay'></div>
+          <div className='taskalertcntbody'>
+            <label htmlFor=''>Pending Tasks</label>
             <div className=''>
+              <p>Pipe Repair</p>
+              <p>Hi, I need help fixing a leaking faucet in my kitchen</p>
+              <div className='divider'></div>
               <div className=''>
-                <img src={tcalendar} alt='' srcset='' />
-                <label htmlFor=''>Sun, Nov 25, 2024.</label>
+                <div className=''>
+                  <img src={tcalendar} alt='' srcset='' />
+                  <label htmlFor=''>Sun, Nov 25, 2024.</label>
+                </div>
+                <div className=''>
+                  <img src={ttime} alt='' srcset='' />
+                  <label htmlFor=''>9:30 Am. 1hr</label>
+                </div>
+                <div className=''>
+                  <img src={tlocation} alt='' srcset='' />
+                  <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
+                </div>
               </div>
               <div className=''>
-                <img src={ttime} alt='' srcset='' />
-                <label htmlFor=''>9:30 Am. 1hr</label>
+                <button>Accept</button>
+                <button>Decline</button>
               </div>
-              <div className=''>
-                <img src={tlocation} alt='' srcset='' />
-                <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
-              </div>
-            </div>
-            <div className=''>
-              <button>Accept</button>
-              <button>Decline</button>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
+
       <label htmlFor=''>Pending Tasks</label>
       <div className=''>
         <p>Pipe Repair</p>
