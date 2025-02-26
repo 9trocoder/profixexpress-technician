@@ -75,9 +75,9 @@ function Dashboard() {
       </div>
     );
   return (
-    <div>
-      <h2>Hi {userData.fullName}</h2>
-      <p>You have 1 pending task and 3 tasks to complete</p>
+    <div className="techdash">
+      <h2 className="techdashgreet">Hi {userData.fullName}</h2>
+      <p className="techdashpar">You have 1 pending task and 3 tasks to complete</p>
       <div className='taskalertcntoverlay'>
         <div className='taskalertcntbody'>
           <label htmlFor=''>Pending Tasks</label>
