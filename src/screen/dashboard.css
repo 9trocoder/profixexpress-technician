@@ -599,3 +599,52 @@
   letter-spacing: -1%;
   color: #16291eb2;
 }
+
+.thspp {
+  height: 10px;
+}
+
+.themessagecnt {
+  border-bottom: 1px solid #dcdcdc;
+  cursor: pointer;
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pravatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 45px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.tmname {
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  color: #1e1e1e;
+}
+
+.tmcon {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15.86px;
+  letter-spacing: 0%;
+  color: #1e1e1e99;
+  margin: 5px 0;
+}
+
+.tmtime {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13.42px;
+  letter-spacing: 0%;
+  color: #1e1e1e99;
+}

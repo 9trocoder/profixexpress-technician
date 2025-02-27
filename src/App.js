@@ -16,6 +16,7 @@ import PrivateRoute from "./utilities/ProtectedRoute";
 import SignIn from "./screen/SignIn";
 import Task from "./screen/Task";
 import TaskDetails from "./screen/task_details";
+import Message from "./screen/message";
 
 const googleMapsApiKey = "AIzaSyCeirrtXS_SjOfBcSX_-uetXg0jtsawF-s";
 
@@ -48,6 +49,14 @@ function App() {
           element={
             <PrivateRoute>
               <TaskDetails />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/message'
+          element={
+            <PrivateRoute>
+              <Message />
             </PrivateRoute>
           }
         />
