@@ -7,6 +7,7 @@ import verbg from "../assets/unverifiedbg.png";
 import ttime from "../assets/ttime.svg";
 import tcalendar from "../assets/tcalendar.svg";
 import tlocation from "../assets/tlocation.svg";
+import { Menu, X } from "lucide-react";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [active, setActive] = useState(true);
   const [acceptedtsk, setAcceptedtsk] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     // Check if a user is logged in
     const fetchUserData = async () => {
@@ -155,7 +157,29 @@ function Dashboard() {
         </>
       )}
 
+      {isOpen && (
+        <div className=''>
+          <div
+            className='sidebar-container'
+            onClick={() => setIsOpen(!isOpen)}
+          ></div>
+          <div className={`sidebar ${isOpen ? "open" : ""}`}>
+            <button className='toggle-btn' onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+            <div className='thsp'></div>
+            <h1>{userData.fullName}</h1>
+            <div className='thsp'></div>
+            <div className='divider'></div>
+            <div className='thsp'></div>
+          </div>
+        </div>
+      )}
+
       <div className='techdash'>
+        <button className='toggle-btn' onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
         <h2 className='techdashgreet'>Hi {userData.fullName}</h2>
         <p className='techdashpar'>
           You have 1 pending task and 3 tasks to complete
