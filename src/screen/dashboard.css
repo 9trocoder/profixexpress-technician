@@ -1,8 +1,3 @@
-
-
-
-
-
 .techdashtop {
   position: sticky; /* Fix at the top */
   top: 0;
@@ -173,7 +168,6 @@
   align-items: center;
   z-index: 120;
 }
-
 
 /* Modal Box */
 .modal {
@@ -359,7 +353,6 @@
   align-items: center;
 }
 
-
 .tasksearch input {
   width: 100%;
   border: 1px solid #a2aaa5;
@@ -421,8 +414,6 @@
   height: 60vh; */
 }
 
-
-
 .sidebar-container {
   display: flex;
   align-items: center;
@@ -445,7 +436,7 @@
 
 .sidebar {
   position: fixed;
-  top: 0;/* Initially hidden */
+  top: 0; /* Initially hidden */
   width: 100%;
   max-width: 400px;
   height: 100vh;
@@ -471,4 +462,20 @@
 
 .sidebar li:hover {
   background: #1f3d30;
+}
+
+.thesidelinks {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.thesidelinks a {
+  text-decoration: none;
+  color: #16291e;
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21.7px;
+  letter-spacing: -1%;
 }

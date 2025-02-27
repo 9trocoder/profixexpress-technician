@@ -34,7 +34,14 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path='/task' element={<Task />} />
+        <Route
+          path='/task'
+          element={
+            <PrivateRoute>
+              <Task />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );

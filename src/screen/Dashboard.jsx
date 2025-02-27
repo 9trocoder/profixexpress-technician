@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { auth, db, get, ref } from "../utilities/firebaseConfig";
 import { signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import verbg from "../assets/unverifiedbg.png";
 import ttime from "../assets/ttime.svg";
 import tcalendar from "../assets/tcalendar.svg";
@@ -172,6 +172,13 @@ function Dashboard() {
             <div className='thsp'></div>
             <div className='divider'></div>
             <div className='thsp'></div>
+            <div className="thesidelinks">
+              <Link to="/dashboard">Home</Link>
+              <Link to="/task">Task</Link>
+              <Link to="/message">Message</Link>
+              <Link to="/earning">Earning</Link>
+              <Link to="/profile">Profile</Link>
+            </div>
           </div>
         </div>
       )}
