@@ -20,13 +20,13 @@ function TaskDetails() {
       <div className='thsp'></div>
       <p className='taskinfo'>Task info</p>
       <div className='taskinfocnt'>
-        <p>Date booked</p>
-        <p>Sun, Nov 25, 2025</p>
+        <p className="taskdatebook">Date booked</p>
+        <p className="taskdatecnt">Sun, Nov 25, 2025</p>
         <div className='divider'></div>
-        <p>Location</p>
-        <p>VI Lagos</p>
+        <p className="taskdatebook">Location</p>
+        <p className="taskdatecnt">VI Lagos</p>
         <div className='divider'></div>
-        <p>Price breakdown</p>
+        <p className="taskdatebook">Price breakdown</p>
         <div className='pricebreakitem'>
           <p>Hourly rate:</p>
           <p>N15,000/hr</p>
@@ -40,15 +40,17 @@ function TaskDetails() {
           <p>N25,500</p>
         </div>
       </div>
-      <p>Task details/notes</p>
-      <div className=''>
-        <p>
+      <div className="thsp"></div>
+      <p className="taskinfo">Task details/notes</p>
+      <div className='taskinfocnt'>
+        <p className="taskinfocntpar">
           Hi, I need help fixing a leaking faucet in my kitchen. It's been
           dripping non-stop, and I'd like to get it repaired as soon as
           possible. Please let me know if you're available and what the next
           steps are. Thanks!
         </p>
       </div>
+      <div className="thsp"></div>
       <p>Task image</p>
       <div className='taskimageset'>
         <img src='' alt='' srcset='' />

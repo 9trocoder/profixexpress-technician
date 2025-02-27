@@ -555,3 +555,47 @@
   border-radius: 12px;
   background-color: #fff;
 }
+
+.taskdatebook {
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: -1%;
+  color: #16291e;
+  margin-bottom: 10px;
+}
+
+.taskdatecnt {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: -1%;
+  color: #16291eb2;
+}
+
+.pricebreakitem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.pricebreakitem p {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 25px;
+  letter-spacing: -1%;
+  color: #16291eb2;
+}
+
+.taskinfocntpar {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: -1%;
+  color: #16291eb2;
+}
