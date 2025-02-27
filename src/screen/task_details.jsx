@@ -3,24 +3,23 @@ import backarrow from "../assets/backwardarrow.svg";
 import { useNavigate } from "react-router-dom";
 
 function TaskDetails() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
-    <div className="taskdecnt">
-      <button className="backbtn" onClick={() => navigate("/dashboard")}>
-        <img src={backarrow} alt='' srcset=''   />
+    <div className='taskdecnt'>
+      <button className='backbtn' onClick={() => navigate("/dashboard")}>
+        <img src={backarrow} alt='' srcset='' />
       </button>
       <h2 className='techdashgreet'>Pipe Repair</h2>
-      <p className="taskclient">
+      <p className='taskclient'>
         Client: <span>Josephine Edet</span>
       </p>
-      <div className="taskstatus">
-         <p className="taskstatustitle">Status: </p>
-      <div className='taskstatuscnt'>Pending</div>
+      <div className='taskstatus'>
+        <p className='taskstatustitle'>Status: </p>
+        <div className='taskstatuscnt'>Pending</div>
       </div>
-     
       <div className='thsp'></div>
-      <p>Task info</p>
-      <div className=''>
+      <p className='taskinfo'>Task info</p>
+      <div className='taskinfocnt'>
         <p>Date booked</p>
         <p>Sun, Nov 25, 2025</p>
         <div className='divider'></div>

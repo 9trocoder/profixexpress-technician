@@ -537,3 +537,21 @@
   color: #dead4d;
   border-radius: 8px;
 }
+
+.taskinfo {
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 17.6px;
+  letter-spacing: -1%;
+  margin-bottom: 10px;
+  color: #16291e;
+}
+
+.taskinfocnt {
+  border: 1px solid #ececec;
+  box-shadow: 0px 4px 37.8px 0px #0000000d;
+  padding: 16px;
+  border-radius: 12px;
+  background-color: #fff;
+}
