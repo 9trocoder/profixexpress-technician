@@ -7,7 +7,14 @@ function TaskDetails() {
       <button>
         <img src={backarrow} alt='' srcset='' />
       </button>
-      <h2 className="techdashgreet">Pipe Repair</h2>
+      <h2 className='techdashgreet'>Pipe Repair</h2>
+      <p>
+        Client: <span>Josephine Edet</span>
+      </p>
+      <p>Status: </p>
+      <div className=''>Pending</div>
+      <div className='thsp'></div>
+      <p>Task info</p>
     </div>
   );
 }
