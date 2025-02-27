@@ -1,18 +1,23 @@
 import React from "react";
 import backarrow from "../assets/backwardarrow.svg";
+import { useNavigate } from "react-router-dom";
 
 function TaskDetails() {
+    const navigate = useNavigate();
   return (
-    <div>
-      <button>
-        <img src={backarrow} alt='' srcset='' />
+    <div className="taskdecnt">
+      <button className="backbtn" onClick={() => navigate("/dashboard")}>
+        <img src={backarrow} alt='' srcset=''   />
       </button>
       <h2 className='techdashgreet'>Pipe Repair</h2>
-      <p>
+      <p className="taskclient">
         Client: <span>Josephine Edet</span>
       </p>
-      <p>Status: </p>
-      <div className=''>Pending</div>
+      <div className="taskstatus">
+         <p className="taskstatustitle">Status: </p>
+      <div className='taskstatuscnt'>Pending</div>
+      </div>
+     
       <div className='thsp'></div>
       <p>Task info</p>
       <div className=''>
