@@ -145,6 +145,7 @@ function Dashboard() {
                       className='tpbaccept'
                       onClick={() => {
                         setAcceptedtsk(false);
+                        navigate("/task_details");
                       }}
                     >
                       Proceed to Task Details
@@ -168,16 +169,16 @@ function Dashboard() {
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
             <div className='thsp'></div>
-            <h1>{userData.fullName}</h1>
+            <h1 className="techdashgreet">{userData.fullName}</h1>
             <div className='thsp'></div>
             <div className='divider'></div>
             <div className='thsp'></div>
-            <div className="thesidelinks">
-              <Link to="/dashboard">Home</Link>
-              <Link to="/task">Task</Link>
-              <Link to="/message">Message</Link>
-              <Link to="/earning">Earning</Link>
-              <Link to="/profile">Profile</Link>
+            <div className='thesidelinks'>
+              <Link to='/dashboard'>Home</Link>
+              <Link to='/task'>Task</Link>
+              <Link to='/message'>Message</Link>
+              <Link to='/earning'>Earning</Link>
+              <Link to='/profile'>Profile</Link>
             </div>
           </div>
         </div>
@@ -214,11 +215,19 @@ function Dashboard() {
             </div>
           </div>
           <div className='taskpropsbtn'>
-            <button className='tpbaccept'>View Task Details</button>
+            <button
+              className='tpbaccept'
+              onClick={() => navigate("/task_details")}
+            >
+              View Task Details
+            </button>
           </div>
         </div>
         <p className='taskpropss'>Active Tasks</p>
-        <div className='taskalertmain'>
+        <div
+          className='taskalertmain'
+          onClick={() => navigate("/task_details")}
+        >
           <p className='tasktitle'>House Cleaning</p>
           <p className='taskparam'>
             Hi, I need help fixing a leaking faucet in my kitchen...
