@@ -438,7 +438,7 @@
   position: fixed;
   top: 0; /* Initially hidden */
   width: 100%;
-  max-width: 350px;
+  max-width: 300px;
   height: 100vh;
   background: #fff;
   padding: 20px;
