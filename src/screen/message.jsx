@@ -70,12 +70,17 @@ function Message() {
         </div>
 
         <div className='thecontentbd'>
-          <div className='themessagecnt'>
+          <div
+            className='themessagecnt'
+            onClick={() => navigate("/message_details")}
+          >
             <img src={profileavatar} alt='' className='pravatar' />
             <div className='themessageright'>
-              <p className="tmname">Jyte Mfoniso</p>
-              <p  className="tmcon">This conversation has now been closed. if you...</p>
-              <p className="tmtime">3 days ago</p>
+              <p className='tmname'>Jyte Mfoniso</p>
+              <p className='tmcon'>
+                This conversation has now been closed. if you...
+              </p>
+              <p className='tmtime'>3 days ago</p>
             </div>
           </div>
         </div>

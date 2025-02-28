@@ -17,6 +17,7 @@ import SignIn from "./screen/SignIn";
 import Task from "./screen/Task";
 import TaskDetails from "./screen/task_details";
 import Message from "./screen/message";
+import MessageDetails from "./screen/message_details";
 
 const googleMapsApiKey = "AIzaSyCeirrtXS_SjOfBcSX_-uetXg0jtsawF-s";
 
@@ -57,6 +58,14 @@ function App() {
           element={
             <PrivateRoute>
               <Message />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/message_details'
+          element={
+            <PrivateRoute>
+              <MessageDetails />
             </PrivateRoute>
           }
         />
