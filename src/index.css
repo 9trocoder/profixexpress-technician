@@ -32,7 +32,7 @@ h4 {
 input,
 textarea,
 select {
-  font-size: 16px; /* Prevent zoom on mobile */
+  font-size: 16px !important; /* Prevent zoom on mobile */
   touch-action: manipulation;
 }
 

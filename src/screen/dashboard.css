@@ -720,6 +720,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
   margin: 0 16px;
 }
 
@@ -735,7 +736,7 @@
   border: none;
   font-family: Instrument Sans;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 17.08px;
   letter-spacing: -2%;
   background-color: transparent;
