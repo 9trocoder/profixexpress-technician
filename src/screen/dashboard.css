@@ -712,7 +712,6 @@
   box-shadow: 0px -6px 12.5px -7px #0000001a;
   z-index: 145px;
   height: 100px;
-  padding: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -723,6 +722,7 @@
   align-items: center;
   gap: 10px;
   width: 100%;
+  margin: 0 16px;
 }
 
 .thetypemsg {
