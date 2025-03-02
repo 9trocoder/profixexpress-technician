@@ -1,28 +1,37 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
-import { auth } from "../utilities/firebaseConfig";
+import { auth, db, get, ref } from "../utilities/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import "./signup.css";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
+    setError("");
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate("/dashboard"); // Redirect to dashboard on successful sign-in
-    } catch (error) {
-      setError(error.message);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const userId = userCredential.user.uid;
+      const roleRef = ref(db, `technicians/${userId}/role`);
+      const snapshot = await get(roleRef);
+
+      if (snapshot.exists() && snapshot.val() === "technician") {
+        navigate("/dashboard");
+      } else {
+        setError("Access denied.");
+      }
+    } catch (err) {
+      setError(err.message);
     }
-    setLoading(false);
   };
 
   return (
@@ -54,8 +63,8 @@ function SignIn() {
         </div>
         <p className='forgotpassworkclick'>Forgot password?</p>
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type='submit' disabled={loading} className='thesigninbtn'>
-          {loading ? "Signing in..." : "Sign In"}
+        <button type='submit' className='thesigninbtn'>
+          Sign In
         </button>
       </form>
       <p className='forgotpassworkclick'>

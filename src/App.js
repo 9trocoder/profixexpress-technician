@@ -18,10 +18,33 @@ import Task from "./screen/Task";
 import TaskDetails from "./screen/task_details";
 import Message from "./screen/message";
 import MessageDetails from "./screen/message_details";
+import ProtectedRoute from "./utilities/ProtectedRoute";
+import { AuthProvider } from "./utilities/Auth";
+import { requestNotificationPermission } from "./utilities/firebaseConfig";
+import EditProfile from "./screen/edit_profile";
+import RaiseDispute from "./screen/RaiseDispute";
+import UploadProof from "./screen/Uploadproof";
+import TaskHistory from "./screen/Taskhistory";
+import Reviews from "./screen/reviews";
+import Earnings from "./screen/Earnings";
+import Availability from "./screen/Availability";
+import Notifications from "./screen/notification";
+import Settings from "./screen/settings";
+import TrackLocation from "./screen/TrackLocation";
+import ScheduledTasks from "./screen/Scheduledtasks";
+import Analytics from "./screen/Analytics";
+import MapView from "./screen/MapView";
+import LiveLocation from "./screen/Livelocation";
+import EarningsDashboard from "./screen/Earningsdashboard";
+import ServicePricing from "./screen/Servicepricing";
+import CallTechnician from "./screen/Calltechnician";
 
-const googleMapsApiKey = "AIzaSyCeirrtXS_SjOfBcSX_-uetXg0jtsawF-s";
+export const googleMapsApiKey = "AIzaSyCeirrtXS_SjOfBcSX_-uetXg0jtsawF-s";
 
 function App() {
+  useEffect(() => {
+    requestNotificationPermission();
+  }, []);
   return (
     <Router>
       <Routes>
@@ -29,46 +52,28 @@ function App() {
         <Route path='/signup' element={<Signuppage />} />
         <Route path='/info_one' element={<Infopage />} />
         <Route path='/info_two' element={<InfopageTwo />} />
-        <Route
-          path='/dashboard'
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/task'
-          element={
-            <PrivateRoute>
-              <Task />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/task_details'
-          element={
-            <PrivateRoute>
-              <TaskDetails />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/message'
-          element={
-            <PrivateRoute>
-              <Message />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/message_details'
-          element={
-            <PrivateRoute>
-              <MessageDetails />
-            </PrivateRoute>
-          }
-        />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/task' element={<Task />} />
+        <Route path='/task_details/:id' element={<TaskDetails />} />
+        {/* <Route path='/message' element={<Message />} />
+        <Route path='/message_details' element={<MessageDetails />} /> */}
+        <Route path='/edit-profile' element={<EditProfile />} />
+        <Route path='/notifications' element={<Notifications />} />
+        <Route path='/raise-dispute/:taskId' element={<RaiseDispute />} />
+        <Route path='/task-history' element={<TaskHistory />} />
+        <Route path='/upload-proof/:taskId' element={<UploadProof />} />
+        <Route path='/reviews' element={<Reviews />} />
+        <Route path='/earnings' element={<Earnings />} />
+        <Route path='/availability' element={<Availability />} />
+        <Route path='/settings' element={<Settings />} />
+        <Route path='/track-location' element={<TrackLocation />} />
+        <Route path='/scheduled-tasks' element={<ScheduledTasks />} />
+        <Route path='/analytics' element={<Analytics />} />
+        <Route path='/map-view' element={<MapView />} />
+        <Route path='/live-location' element={<LiveLocation />} />
+        <Route path='/earnings-dashboard' element={<EarningsDashboard />} />
+        <Route path='/service-pricing' element={<ServicePricing />} />
+        <Route path='/call-technician' element={<CallTechnician />} />
       </Routes>
     </Router>
   );

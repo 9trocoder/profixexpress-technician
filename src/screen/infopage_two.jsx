@@ -27,6 +27,8 @@ function InfopageTwo() {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState(null);
 
+  const [service, setService] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,7 +43,7 @@ function InfopageTwo() {
       }
 
       try {
-        const userRef = ref(db, `technician/${user.uid}`);
+        const userRef = ref(db, `technicians/${user.uid}`);
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
           setUserData(snapshot.val());
@@ -57,53 +59,8 @@ function InfopageTwo() {
     fetchUserData();
   }, []);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const categoriesRef = ref(db, "categories");
-        const snapshot = await get(categoriesRef);
-        if (snapshot.exists()) {
-          setCategories(Object.keys(snapshot.val()));
-        }
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-    fetchCategories();
-  }, []);
-
   const handleFileChange = (event, setFile) => {
     setFile(event.target.files[0]);
-  };
-
-  const handleCategoryChange = async (event) => {
-    const categoryName = event.target.value;
-    setSelectedCategory(categoryName);
-    setSelectedServices([]);
-    setServices([]);
-
-    if (categoryName) {
-      try {
-        const servicesRef = ref(db, `categories/${categoryName}/services`);
-        const snapshot = await get(servicesRef);
-        if (snapshot.exists()) {
-          const servicesData = snapshot.val();
-          setServices(
-            Object.values(servicesData).map((service) => service.name)
-          );
-        }
-      } catch (error) {
-        console.error("Error fetching services:", error);
-      }
-    }
-  };
-
-  const handleServiceToggle = (serviceName) => {
-    setSelectedServices((prevSelected) =>
-      prevSelected.includes(serviceName)
-        ? prevSelected.filter((name) => name !== serviceName)
-        : [...prevSelected, serviceName]
-    );
   };
 
   const saveDetails = async () => {
@@ -142,7 +99,7 @@ function InfopageTwo() {
         certificateUrl = await getDownloadURL(certificateRef);
       }
 
-      await set(ref(db, `technician/${userId}`), {
+      await set(ref(db, `technicians/${userId}`), {
         ...userData,
         specialization: selectedCategory,
         services: selectedServices,
@@ -150,6 +107,7 @@ function InfopageTwo() {
         certificateName,
         issuingOrganisation,
         monthyear,
+        service,
         certificateUrl,
         fromtime,
         totime,
@@ -181,45 +139,18 @@ function InfopageTwo() {
       </p>
 
       <div className='inputcnt'>
-        <label>Specialization</label>
-        <select onChange={handleCategoryChange} value={selectedCategory}>
-          <option value=''>-- Select a Category --</option>
-          {categories.map((category, index) => (
-            <option key={index} value={category}>
-              {category}
-            </option>
-          ))}
+        <label>Service</label>
+        <select
+          value={service}
+          onChange={(e) => setService(e.target.value)} required
+        >
+           <option value="">Select Service</option>
+          <option value="plumbing">Plumbing</option>
+          <option value="electrical">Electrical</option>
+          <option value="carpentry">Carpentry</option>
         </select>
       </div>
-      {selectedCategory && services.length > 0 && (
-        <>
-          <h2>Select Services</h2>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            {services.map((service, index) => (
-              <div
-                key={index}
-                onClick={() => handleServiceToggle(service)}
-                style={{
-                  padding: "8px",
-                  margin: "5px",
-                  cursor: "pointer",
-                  backgroundColor: selectedServices.includes(service)
-                    ? "lightgreen"
-                    : "lightgray",
-                }}
-              >
-                {service}
-              </div>
-            ))}
-          </div>
-          <h3>Selected Services:</h3>
-          <ul>
-            {selectedServices.map((service, index) => (
-              <li key={index}>{service}</li>
-            ))}
-          </ul>
-        </>
-      )}
+
       <div className='inputcnt'>
         <label>Years of experience</label>
         <input
@@ -284,7 +215,6 @@ function InfopageTwo() {
       </div>
 
       <div className='inputcnt'>
-        {" "}
         <label>Government Issued ID</label>
         <select
           value={govissuedid}

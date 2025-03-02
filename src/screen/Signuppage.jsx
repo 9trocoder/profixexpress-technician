@@ -30,7 +30,7 @@ function Signuppage() {
       const user = result.user;
       if (!user) return;
 
-      const userRef = ref(db, `technician/${user.uid}`);
+      const userRef = ref(db, `technicians/${user.uid}`);
 
       // check if user exists in Firebase
       const snapshot = await get(userRef);
@@ -40,20 +40,23 @@ function Signuppage() {
 
         // checking for user sign up progress
         if (!userData.step1Completed) {
-          navigate("/");
+          navigate("/signin");
         } else if (!userData.step2Completed) {
           navigate("/info_one");
         } else if (!userData.step4Completed) {
           navigate("/info_two");
         } else {
-          navigate("/portal"); // All steps completed
+          navigate("/dashboard"); // All steps completed
         }
       } else {
         // Store user data in Realtime Database
-        await set(ref(db, `technician/${user.uid}`), {
+        await set(ref(db, `technicians/${user.uid}`), {
           email: user.email,
           role: "technician", // Automatically assign "technician" role
           approval: "pending",
+          isVerified: false,
+          isOnline: false,
+          availability: "morning",
           step1Completed: true,
         });
 
@@ -107,11 +110,14 @@ function Signuppage() {
         />
       </div>
 
+      <p>{error}</p>
+
       <button className='thesigninbtn' onClick={handleSignUp}>
         Continue
       </button>
       <p className='forgotpassworkclick'>
-        I have an account ? <span onClick={() => navigate("/")}>Sign in</span>
+        I have an account ?
+        <span onClick={() => navigate("/signin")}>Sign in</span>
       </p>
     </div>
   );

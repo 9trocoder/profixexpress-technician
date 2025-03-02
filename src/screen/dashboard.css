@@ -467,6 +467,8 @@
 .thesidelinks {
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
+  max-height: 50vh;
   gap: 30px;
 }
 

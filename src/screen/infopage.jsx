@@ -23,7 +23,7 @@ function Infopage() {
       }
 
       try {
-        const userRef = ref(db, `technician/${user.uid}`);
+        const userRef = ref(db, `technicians/${user.uid}`);
         const snapshot = await get(userRef);
 
         if (snapshot.exists()) {
@@ -60,7 +60,7 @@ function Infopage() {
     const userId = auth.currentUser.uid;
 
     // store basic information details in Firebase Realtime Database
-    await set(ref(db, `technician/${userId}`), {
+    await set(ref(db, `technicians/${userId}`), {
       fullName,
       mobile,
       gender,
@@ -71,6 +71,9 @@ function Infopage() {
       email: userData.email,
       role: userData.role, // Automatically assign "technician" role
       approval: userData.approval,
+      isVerified: userData.isVerified,
+      isOnline: userData.isOnline,
+      availability: userData.availability,
       step1Completed: true,
       step2Completed: true,
     });

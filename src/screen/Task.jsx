@@ -6,8 +6,8 @@ import tlocation from "../assets/tlocation.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db, get, ref } from "../utilities/firebaseConfig";
 
-
 import { Menu, X } from "lucide-react";
+import { onValue, update } from "firebase/database";
 
 export const taskbtnlist = [
   {
@@ -16,14 +16,18 @@ export const taskbtnlist = [
   },
   {
     id: 1,
+    name: "New task",
+  },
+  {
+    id: 2,
     name: "Pending",
   },
   {
-    id: 0,
+    id: 3,
     name: "In Progress",
   },
   {
-    id: 0,
+    id: 4,
     name: "Completed",
   },
 ];
@@ -33,25 +37,46 @@ function Task() {
   const [isOpen, setIsOpen] = useState(false);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [technician, setTechnician] = useState(null);
+  const [online, setOnline] = useState(false);
+  const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    // Check if a user is logged in
-    const fetchUserData = async () => {
-      const currentUser = auth.currentUser;
-      if (currentUser) {
-        const userRef = ref(db, `technician/${currentUser.uid}`);
-        const snapshot = await get(userRef);
-        if (snapshot.exists()) {
-          setUserData(snapshot.val());
-        } else {
-          console.log("User data not found");
-        }
+    const user = auth.currentUser;
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    const technicianRef = ref(db, `technicians/${user.uid}`);
+    get(technicianRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        const techData = snapshot.val();
+        setTechnician(techData);
+        setOnline(techData.online);
       }
-      setLoading(false);
-    };
+    });
+    const tasksRef = ref(db, "tasks");
+    onValue(tasksRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const tasksData = Object.entries(snapshot.val()).map(([id, task]) => ({
+          id,
+          ...task,
+        }));
+        const myTasks = tasksData.filter(
+          (task) => task.technicianId === user.uid
+        );
+        setTasks(myTasks);
+      }
+    });
+  }, [navigate]);
 
-    fetchUserData();
-  }, []);
+  const acceptTask = (taskId) => {
+    update(ref(db, `tasks/${taskId}`), { status: "accepted" });
+  };
+
+  const rejectTask = (taskId) => {
+    update(ref(db, `tasks/${taskId}`), { status: "rejected" });
+  };
   return (
     <>
       {isOpen && (
@@ -65,16 +90,30 @@ function Task() {
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
             <div className='thsp'></div>
-            <h1 className="techdashgreet">{userData.fullName}</h1>
+            <h1 className='techdashgreet'>{technician.fullName}</h1>
             <div className='thsp'></div>
             <div className='divider'></div>
             <div className='thsp'></div>
             <div className='thesidelinks'>
               <Link to='/dashboard'>Home</Link>
               <Link to='/task'>Task</Link>
-              <Link to='/message'>Message</Link>
               <Link to='/earning'>Earning</Link>
               <Link to='/profile'>Profile</Link>
+              <Link to='/edit-profile'>Edit Profile</Link>
+              <Link to='/notifications'>Notifications</Link>
+              <Link to='/task-history'>Task History</Link>
+              <Link to='/reviews'>My Reviews</Link>
+              <Link to='/earnings'>Earnings</Link>
+              <Link to='/availability'>Availability</Link>
+              <Link to='/settings'>Settings</Link>
+              <Link to='/track-location'>Track Location</Link>
+              <Link to='/scheduled-tasks'>Scheduled Tasks</Link>
+              <Link to='/analytics'>Analytics</Link>
+              <Link to='/map-view'>Map View</Link>
+              <Link to='/live-location'>Live Location</Link>
+              <Link to='/earnings-dashboard'>Earnings Dashboard</Link>
+              <Link to='/service-pricing'>Service Pricing</Link>
+              <Link to='/call-technician'>Call Technician</Link>
             </div>
           </div>
         </div>
@@ -110,55 +149,83 @@ function Task() {
         </div>
 
         <div className='thecontentbd'>
-          <div className='taskalertmain'>
-            <p className='tasktitle'>Pipe Repair</p>
-            <p className='taskparam'>
-              Hi, I need help fixing a leaking faucet in my kitchen
-            </p>
-            <div className='divider'></div>
-            <div className='taskprops'>
-              <div className='taskpropsitem'>
-                <img src={tcalendar} alt='' srcset='' />
-                <label htmlFor=''>Sun, Nov 25, 2024.</label>
-              </div>
-              <div className='taskpropsitem'>
-                <img src={ttime} alt='' srcset='' />
-                <label htmlFor=''>9:30 Am. 1hr</label>
-              </div>
-              <div className='taskpropsitem'>
-                <img src={tlocation} alt='' srcset='' />
-                <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
-              </div>
-            </div>
-            <div className='taskpropsbtn'>
-              <button className='tpbaccept'   onClick={() => navigate("/task_details")}>View Task Details</button>
-            </div>
-          </div>
           <div className='thespace'></div>
-          <div className='taskalertmain'>
-            <p className='tasktitle'>Ac maintenance and repair.</p>
-            <p className='taskparam'>
-              Hi, I need help fixing a leaking faucet in my kitchen
-            </p>
-            <div className='divider'></div>
-            <div className='taskprops'>
-              <div className='taskpropsitem'>
-                <img src={tcalendar} alt='' srcset='' />
-                <label htmlFor=''>Sun, Nov 2, 2024.</label>
+          {activenav === "New task" && tasks.length > 0 ? (
+            tasks.map((task) => (
+              <div className='taskalertmain' key={task.id}>
+                <p className='tasktitle'>{task.title}</p>
+                <p className='taskparam'>{task.info}</p>
+                <div className='divider'></div>
+                <div className='taskprops'>
+                  <div className='taskpropsitem'>
+                    <img src={tcalendar} alt='' srcset='' />
+                    <label htmlFor=''>{task.date}</label>
+                  </div>
+                  <div className='taskpropsitem'>
+                    <img src={ttime} alt='' srcset='' />
+                    <label htmlFor=''>
+                      {task.time} {task.duration}
+                    </label>
+                  </div>
+                  <div className='taskpropsitem'>
+                    <img src={tlocation} alt='' srcset='' />
+                    <label htmlFor=''>{task.address}</label>
+                  </div>
+                </div>
+                <p>
+                  <strong>Status:</strong> {task.status}
+                </p>
+
+                <div className='taskpropsbtn'>
+                  <button className='tpbaccept' onClick={acceptTask(task.id)}>
+                    Accept
+                  </button>
+                  <button className='tpbdecline' onClick={rejectTask(task.id)}>
+                    Decline
+                  </button>
+                </div>
               </div>
-              <div className='taskpropsitem'>
-                <img src={ttime} alt='' srcset='' />
-                <label htmlFor=''>9:30 Am. 1hr</label>
+            ))
+          ) : (
+            <p>No tasks assigned yet.</p>
+          )}
+          {activenav === "All" && tasks.length > 0 ? (
+            tasks.map((task) => (
+              <div className='taskalertmain' key={task.id}>
+                <p className='tasktitle'>{task.title}</p>
+                <p className='taskparam'>{task.info}</p>
+                <div className='divider'></div>
+                <div className='taskprops'>
+                  <div className='taskpropsitem'>
+                    <img src={tcalendar} alt='' srcset='' />
+                    <label htmlFor=''>{task.date}</label>
+                  </div>
+                  <div className='taskpropsitem'>
+                    <img src={ttime} alt='' srcset='' />
+                    <label htmlFor=''>
+                      {task.time} {task.duration}
+                    </label>
+                  </div>
+                  <div className='taskpropsitem'>
+                    <img src={tlocation} alt='' srcset='' />
+                    <label htmlFor=''>{task.address}</label>
+                  </div>
+                </div>
+                <div className='taskpropsbtn'>
+                  <button
+                    className='tpbaccept'
+                    onClick={() => navigate(`/task_details/${task.id}`)}
+                  >
+                    View Task Details
+                  </button>
+                </div>
               </div>
-              <div className='taskpropsitem'>
-                <img src={tlocation} alt='' srcset='' />
-                <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
-              </div>
-            </div>
-            <div className='taskpropsbtn'>
-              <button className='tpbaccept'   onClick={() => navigate("/task_details")}>View Task Details</button>
-            </div>
-          </div>
+            ))
+          ) : (
+            <p>No tasks assigned yet.</p>
+          )}
+
+          <div className='thespace'></div>
         </div>
       </div>
     </>

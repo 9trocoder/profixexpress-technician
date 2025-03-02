@@ -1,31 +1,12 @@
-// src/components/PrivateRoute.js
-import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
-import { auth } from "../utilities/firebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "./Auth";
 
-function PrivateRoute({ children }) {
-  const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
-      }
-      setLoading(false);
-    });
+const ProtectedRoute = () => {
+  const { user } = useAuth();
+  return user ? <Outlet /> : <Navigate to="/login" />;
+};
 
-    return unsubscribe;
-  }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  return isAuthenticated ? children : <Navigate to="/" />;
-}
-
-export default PrivateRoute;
+export default ProtectedRoute;

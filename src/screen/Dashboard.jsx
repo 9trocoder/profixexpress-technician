@@ -8,32 +8,48 @@ import ttime from "../assets/ttime.svg";
 import tcalendar from "../assets/tcalendar.svg";
 import tlocation from "../assets/tlocation.svg";
 import { Menu, X } from "lucide-react";
+import { onValue, update } from "firebase/database";
 
 function Dashboard() {
   const navigate = useNavigate();
-  const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [active, setActive] = useState(true);
   const [acceptedtsk, setAcceptedtsk] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  useEffect(() => {
-    // Check if a user is logged in
-    const fetchUserData = async () => {
-      const currentUser = auth.currentUser;
-      if (currentUser) {
-        const userRef = ref(db, `technician/${currentUser.uid}`);
-        const snapshot = await get(userRef);
-        if (snapshot.exists()) {
-          setUserData(snapshot.val());
-        } else {
-          console.log("User data not found");
-        }
-      }
-      setLoading(false);
-    };
+  const [online, setOnline] = useState(false);
+  const [technician, setTechnician] = useState(null);
+  const [tasks, setTasks] = useState([]);
+  const userId = auth.currentUser ? auth.currentUser.uid : null;
 
-    fetchUserData();
-  }, []);
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (!user) {
+      navigate("/");
+      return;
+    }
+    const technicianRef = ref(db, `technicians/${user.uid}`);
+    get(technicianRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        const techData = snapshot.val();
+        setTechnician(techData);
+        setLoading(false);
+        setOnline(techData.online);
+      }
+    });
+    const tasksRef = ref(db, "tasks");
+    onValue(tasksRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const tasksData = Object.entries(snapshot.val()).map(([id, task]) => ({
+          id,
+          ...task,
+        }));
+        const myTasks = tasksData.filter(
+          (task) => task.technicianId === user.uid
+        );
+        setTasks(myTasks);
+      }
+    });
+  }, [navigate]);
 
   const handleaccept = () => {
     setAcceptedtsk(true);
@@ -48,8 +64,25 @@ function Dashboard() {
       console.error("Error signing out:", error);
     }
   };
+
+  const toggleOnlineStatus = () => {
+    const user = auth.currentUser;
+    if (user) {
+      const newStatus = !online;
+      setOnline(newStatus);
+      update(ref(db, `technicians/${user.uid}`), { online: newStatus });
+    }
+  };
+
+  const acceptTask = (taskId) => {
+    update(ref(db, `tasks/${taskId}`), { status: "accepted" });
+  };
+
+  const rejectTask = (taskId) => {
+    update(ref(db, `tasks/${taskId}`), { status: "rejected" });
+  };
   if (loading) return <p>Loading user data...</p>;
-  if (userData.approval === "pending")
+  if (technician.approval === "pending")
     return (
       <div className='notver'>
         <div className='notaprv_cnt'>
@@ -59,12 +92,12 @@ function Dashboard() {
           >
             <p className='botarvtitle'>Your profile has be created.</p>
             <div className='botarvprocnt'>
-              <p className='botarvname'>{userData.fullName}</p>
-              <p className='botarvemail'>{userData.email}</p>
+              <p className='botarvname'>{technician.fullName}</p>
+              <p className='botarvemail'>{technician.email}</p>
             </div>
 
             <div className='bovaprvdet'>
-              <p className='bovaprvdetstatus'>{userData.approval}</p>
+              <p className='bovaprvdetstatus'>{technician.approval}</p>
               <p className='bovaprvdettitle'>Documents under review</p>
             </div>
           </div>
@@ -73,7 +106,7 @@ function Dashboard() {
             <p className='dcarptext'>
               Technician ID is yet to be generated as your application is
               currently under review to see if you are a good fit, we'll send an
-              email to <span>{userData.email}</span> once your application is
+              email to <span>{technician.email}</span> once your application is
               successfull
             </p>
             <button className='cntdevns' onClick={handleSignOut}>
@@ -85,44 +118,48 @@ function Dashboard() {
     );
   return (
     <>
-      {active && (
+      {tasks.length > 0 && (
         <>
           <div className='modal-overlay'>
             <div className='modal'>
-              <div className='taskalertmain'>
-                <p className='tasktitle'>Pipe Repair</p>
-                <p className='taskparam'>
-                  Hi, I need help fixing a leaking faucet in my kitchen, kindly
-                  come now because it is an emergency. it needs to be fixed
-                  immediately
-                </p>
-                <div className='divider'></div>
-                <div className='taskprops'>
-                  <div className='taskpropsitem'>
-                    <img src={tcalendar} alt='' srcset='' />
-                    <label htmlFor=''>Sun, Nov 25, 2024.</label>
+              {tasks.map((task) => (
+                <div className='taskalertmain' key={task.id}>
+                  <p className='tasktitle'>{task.title}</p>
+                  <p className='taskparam'>{task.info}</p>
+                  <div className='divider'></div>
+                  <div className='taskprops'>
+                    <div className='taskpropsitem'>
+                      <img src={tcalendar} alt='' srcset='' />
+                      <label htmlFor=''>{task.date}</label>
+                    </div>
+                    <div className='taskpropsitem'>
+                      <img src={ttime} alt='' srcset='' />
+                      <label htmlFor=''>
+                        {task.time} {task.duration}
+                      </label>
+                    </div>
+                    <div className='taskpropsitem'>
+                      <img src={tlocation} alt='' srcset='' />
+                      <label htmlFor=''>{task.address}</label>
+                    </div>
                   </div>
-                  <div className='taskpropsitem'>
-                    <img src={ttime} alt='' srcset='' />
-                    <label htmlFor=''>9:30 Am. 1hr</label>
-                  </div>
-                  <div className='taskpropsitem'>
-                    <img src={tlocation} alt='' srcset='' />
-                    <label htmlFor=''>No 25, Idunlami St lagos, Nigeria</label>
+                  <p>
+                    <strong>Status:</strong> {task.status}
+                  </p>
+
+                  <div className='taskpropsbtn'>
+                    <button className='tpbaccept' onClick={acceptTask(task.id)}>
+                      Accept
+                    </button>
+                    <button
+                      className='tpbdecline'
+                      onClick={rejectTask(task.id)}
+                    >
+                      Decline
+                    </button>
                   </div>
                 </div>
-                <div className='taskpropsbtn'>
-                  <button className='tpbaccept' onClick={handleaccept}>
-                    Accept
-                  </button>
-                  <button
-                    className='tpbdecline'
-                    onClick={() => setActive(false)}
-                  >
-                    Decline
-                  </button>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </>
@@ -169,16 +206,30 @@ function Dashboard() {
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
             <div className='thsp'></div>
-            <h1 className="techdashgreet">{userData.fullName}</h1>
+            <h1 className='techdashgreet'>{technician.fullName}</h1>
             <div className='thsp'></div>
             <div className='divider'></div>
             <div className='thsp'></div>
             <div className='thesidelinks'>
               <Link to='/dashboard'>Home</Link>
               <Link to='/task'>Task</Link>
-              <Link to='/message'>Message</Link>
               <Link to='/earning'>Earning</Link>
               <Link to='/profile'>Profile</Link>
+              <Link to='/edit-profile'>Edit Profile</Link>
+              <Link to='/notifications'>Notifications</Link>
+              <Link to='/task-history'>Task History</Link>
+              <Link to='/reviews'>My Reviews</Link>
+              <Link to='/earnings'>Earnings</Link>
+              <Link to='/availability'>Availability</Link>
+              <Link to='/settings'>Settings</Link>
+              <Link to='/track-location'>Track Location</Link>
+              <Link to='/scheduled-tasks'>Scheduled Tasks</Link>
+              <Link to='/analytics'>Analytics</Link>
+              <Link to='/map-view'>Map View</Link>
+              <Link to='/live-location'>Live Location</Link>
+              <Link to='/earnings-dashboard'>Earnings Dashboard</Link>
+              <Link to='/service-pricing'>Service Pricing</Link>
+              <Link to='/call-technician'>Call Technician</Link>
             </div>
           </div>
         </div>
@@ -188,7 +239,19 @@ function Dashboard() {
         <button className='toggle-btn' onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
-        <h2 className='techdashgreet'>Hi {userData.fullName}</h2>
+        {technician.location && (
+          <p>
+            <strong>Location:</strong> {technician.location.lat.toFixed(4)},{" "}
+            {technician.location.lng.toFixed(4)}
+          </p>
+        )}
+        <button
+          onClick={toggleOnlineStatus}
+          style={{ background: online ? "green" : "gray" }}
+        >
+          Go {online ? "Online" : "Offline"}
+        </button>
+        <h2 className='techdashgreet'>Hi {technician.fullName}</h2>
         <p className='techdashpar'>
           You have 1 pending task and 3 tasks to complete
         </p>
@@ -252,13 +315,13 @@ function Dashboard() {
         </div>
         <div className='thsp'></div>
         <p>
-          <strong>Name:</strong> {userData.fullName}
+          <strong>Name:</strong> {technician.fullName}
         </p>
         <p>
-          <strong>Email:</strong> {userData.email}
+          <strong>Email:</strong> {technician.email}
         </p>
         <p>
-          <strong>Phone:</strong> {userData.mobile}
+          <strong>Phone:</strong> {technician.mobile}
         </p>
         <button onClick={() => navigate("/task")}>go to task</button>
         <button onClick={handleSignOut}>Sign Out</button>

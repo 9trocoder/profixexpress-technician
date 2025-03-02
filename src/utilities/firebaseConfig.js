@@ -12,10 +12,12 @@ import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
   createUserWithEmailAndPassword,
-  
+  setPersistence,
+  browserLocalPersistence,
 } from "firebase/auth";
 import { getDatabase, ref, set, get } from "firebase/database";
 import { getStorage } from "firebase/storage";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -39,6 +41,28 @@ const db = getDatabase(app);
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 const storage = getStorage(app);
+const messaging = getMessaging(app);
+
+export const requestNotificationPermission = async () => {
+  try {
+    const token = await getToken(messaging, { vapidKey: "YOUR_VAPID_KEY" });
+    if (token) {
+      console.log("Notification token:", token);
+      // Optionally, save the token to your database here.
+      return token;
+    } else {
+      console.warn("No registration token available.");
+    }
+  } catch (error) {
+    console.error("Error requesting notification permission:", error);
+  }
+};
+
+// Listen for incoming messages (foreground)
+onMessage(messaging, (payload) => {
+  console.log("Message received:", payload);
+  alert(`Notification: ${payload.notification.title}`);
+});
 
 export {
   auth,
@@ -58,4 +82,5 @@ export {
   signInWithPhoneNumber,
   createUserWithEmailAndPassword,
   storage,
+  messaging
 };
