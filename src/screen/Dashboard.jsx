@@ -9,6 +9,7 @@ import tcalendar from "../assets/tcalendar.svg";
 import tlocation from "../assets/tlocation.svg";
 import { Menu, X } from "lucide-react";
 import { onValue, update } from "firebase/database";
+import Chat from "./message_details";
 
 function Dashboard() {
   const navigate = useNavigate();
