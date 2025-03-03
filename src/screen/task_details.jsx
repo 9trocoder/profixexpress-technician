@@ -11,7 +11,7 @@ function TaskDetails() {
   const [task, setTask] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
-    const taskRef = ref(db, `tasks/${taskId}`);
+    const taskRef = ref(db, `jobs/${taskId}`);
     get(taskRef).then((snapshot) => {
       if (snapshot.exists()) {
         setTask(snapshot.val());

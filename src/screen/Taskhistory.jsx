@@ -9,7 +9,7 @@ const TaskHistory = () => {
 
   useEffect(() => {
     const user = auth.currentUser;
-    const tasksRef = ref(db, "tasks");
+    const tasksRef = ref(db, "jobs");
     onValue(tasksRef, (snapshot) => {
       if (snapshot.exists()) {
         const tasksData = Object.entries(snapshot.val()).map(([id, task]) => ({ id, ...task }));

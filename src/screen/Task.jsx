@@ -44,7 +44,7 @@ function Task() {
   useEffect(() => {
     const user = auth.currentUser;
     if (!user) {
-      navigate("/login");
+      navigate("/");
       return;
     }
     const technicianRef = ref(db, `technicians/${user.uid}`);
@@ -55,7 +55,7 @@ function Task() {
         setOnline(techData.online);
       }
     });
-    const tasksRef = ref(db, "tasks");
+    const tasksRef = ref(db, "jobs");
     onValue(tasksRef, (snapshot) => {
       if (snapshot.exists()) {
         const tasksData = Object.entries(snapshot.val()).map(([id, task]) => ({
@@ -71,11 +71,11 @@ function Task() {
   }, [navigate]);
 
   const acceptTask = (taskId) => {
-    update(ref(db, `tasks/${taskId}`), { status: "accepted" });
+    update(ref(db, `jobs/${taskId}`), { status: "accepted" });
   };
 
   const rejectTask = (taskId) => {
-    update(ref(db, `tasks/${taskId}`), { status: "rejected" });
+    update(ref(db, `jobs/${taskId}`), { status: "rejected" });
   };
   return (
     <>

@@ -20,7 +20,7 @@ const Dashboard = () => {
   useEffect(() => {
     const user = auth.currentUser;
     if (!user) {
-      navigate("/login");
+      navigate("/");
       return;
     }
 
@@ -35,7 +35,7 @@ const Dashboard = () => {
     });
 
     // Fetch tasks assigned to the technician
-    const tasksRef = ref(db, "tasks");
+    const tasksRef = ref(db, "jobs");
     onValue(tasksRef, (snapshot) => {
       if (snapshot.exists()) {
         const tasksData = Object.entries(snapshot.val()).map(([id, task]) => ({
@@ -55,11 +55,11 @@ const Dashboard = () => {
   };
 
   const acceptTask = (taskId) => {
-    update(ref(db, `tasks/${taskId}`), { status: "accepted" });
+    update(ref(db, `jobs/${taskId}`), { status: "accepted" });
   };
 
   const rejectTask = (taskId) => {
-    update(ref(db, `tasks/${taskId}`), { status: "rejected" });
+    update(ref(db, `jobs/${taskId}`), { status: "rejected" });
   };
 
   return (
