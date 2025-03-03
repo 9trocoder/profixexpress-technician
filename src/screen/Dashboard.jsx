@@ -32,7 +32,8 @@ function Dashboard() {
     get(technicianRef).then((snapshot) => {
       if (snapshot.exists()) {
         const techData = snapshot.val();
-        setTechnician(techData || {});
+        setTechnician(techData);
+        console.log(technician);
         setOnline(techData.online);
       }
     });
@@ -49,7 +50,7 @@ function Dashboard() {
         setTasks(myTasks);
       }
     });
-  }, [navigate]);
+  }, [navigate, technician]);
 
   const toggleOnlineStatus = () => {
     const user = auth.currentUser;
