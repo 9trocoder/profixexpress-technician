@@ -6,7 +6,7 @@ import { db } from "../utilities/firebaseConfig";
 
 const containerStyle = {
   width: "100%",
-  height: "80vh",
+  height: "100vh",
 };
 
 // Fallback center in case geolocation fails
@@ -54,7 +54,7 @@ const MapView = () => {
 
   // Fetch tasks from Firebase (that have a location)
   useEffect(() => {
-    const tasksRef = ref(db, "tasks");
+    const tasksRef = ref(db, "jobs");
     onValue(tasksRef, (snapshot) => {
       if (snapshot.exists()) {
         const tasksData = Object.entries(snapshot.val()).map(([id, task]) => ({

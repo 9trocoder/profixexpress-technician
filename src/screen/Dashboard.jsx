@@ -87,6 +87,14 @@ const Dashboard = () => {
               <Link to='/reviews'>My Reviews</Link>
               <Link to='/availability'>Availability</Link>
               <Link to='/settings'>Settings</Link>
+              <Link to='/track-location'>Track Location</Link>
+              <Link to='/scheduled-tasks'>Scheduled Tasks</Link>
+              <Link to='/analytics'>Analytics</Link>
+              <Link to='/map-view'>Map View</Link>
+              <Link to='/live-location'>Live Location</Link>
+              <Link to='/earnings-dashboard'>Earnings Dashboard</Link>
+              <Link to='/service-pricing'>Service Pricing</Link>
+              <Link to='/call-technician'>Call Technician</Link>
             </div>
           </div>
         </div>
@@ -142,7 +150,6 @@ const Dashboard = () => {
         )}
 
         <h3>General Chat</h3>
-        <Chat chatId={auth.currentUser?.uid} />
       </div>
     </>
   );

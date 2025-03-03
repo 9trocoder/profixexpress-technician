@@ -26,30 +26,10 @@ const Chat = ({ chatId }) => {
     });
   }, [chatId]);
 
-  const [technician, setTechnician] = useState(null);
-
-  useEffect(() => {
-    const user = auth.currentUser;
-    if (!user) {
-      navigate("/");
-      return;
-    }
-
-    // Fetch technician details
-    const technicianRef = ref(db, `technicians/${user.uid}`);
-    onValue(technicianRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const techData = snapshot.val();
-        setTechnician(techData);
-      }
-    });
-  }, []);
-
   const sendMessage = () => {
     if (newMsg.trim() === "") return;
     const messageData = {
       sender: auth.currentUser.uid,
-      senderName: technician.fullName || "User",
       message: newMsg,
       timestamp: Date.now(),
     };
@@ -98,7 +78,7 @@ const Chat = ({ chatId }) => {
           >
             {messages.map((msg, index) => (
               <p key={index}>
-                <strong>{msg.senderName}:</strong> {msg.message}
+                <strong>{msg.sender}:</strong> {msg.message}
               </p>
             ))}
           </div>

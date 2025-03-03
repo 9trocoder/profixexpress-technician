@@ -31,7 +31,7 @@ function TaskDetails() {
       </button>
       <h2 className='techdashgreet'>{task.title}</h2>
       <p className='taskclient'>
-        Client: <span>{task.clientName}</span>
+        Client: <span>{task.userName}</span>
       </p>
       <div className='taskstatus'>
         <p className='taskstatustitle'>Status: </p>
