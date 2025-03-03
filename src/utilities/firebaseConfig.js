@@ -45,7 +45,10 @@ const messaging = getMessaging(app);
 
 export const requestNotificationPermission = async () => {
   try {
-    const token = await getToken(messaging, { vapidKey: "YOUR_VAPID_KEY" });
+    const token = await getToken(messaging, {
+      vapidKey:
+        "BKWy0gYGT1UnhM8vt8tTJ7V78rCdMUdS3CUMdDwdmhbZZcAdpm99eq3AHrYirSFNSXxxYf5MkhYq71K3x3TI6zU",
+    });
     if (token) {
       console.log("Notification token:", token);
       // Optionally, save the token to your database here.
@@ -82,5 +85,5 @@ export {
   signInWithPhoneNumber,
   createUserWithEmailAndPassword,
   storage,
-  messaging
+  messaging,
 };
