@@ -12,8 +12,6 @@ import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
   createUserWithEmailAndPassword,
-  setPersistence,
-  browserLocalPersistence,
 } from "firebase/auth";
 import { getDatabase, ref, set, get } from "firebase/database";
 import { getStorage } from "firebase/storage";
