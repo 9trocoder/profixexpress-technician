@@ -21,7 +21,6 @@ function Dashboard() {
   const [technician, setTechnician] = useState(null);
   const [tasks, setTasks] = useState([]);
   const userId = auth.currentUser ? auth.currentUser.uid : null;
- 
 
   useEffect(() => {
     const user = auth.currentUser;
@@ -33,15 +32,20 @@ function Dashboard() {
     get(technicianRef).then((snapshot) => {
       if (snapshot.exists()) {
         const techData = snapshot.val();
-        setTechnician(techData);
+        setTechnician(techData || {});
         setOnline(techData.online);
       }
     });
     const tasksRef = ref(db, "tasks");
     onValue(tasksRef, (snapshot) => {
       if (snapshot.exists()) {
-        const tasksData = Object.entries(snapshot.val()).map(([id, task]) => ({ id, ...task }));
-        const myTasks = tasksData.filter((task) => task.technicianId === user.uid);
+        const tasksData = Object.entries(snapshot.val()).map(([id, task]) => ({
+          id,
+          ...task,
+        }));
+        const myTasks = tasksData.filter(
+          (task) => task.technicianId === user.uid
+        );
         setTasks(myTasks);
       }
     });
@@ -187,67 +191,76 @@ function Dashboard() {
         <button className='toggle-btn' onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
-        {technician.location && (
-          <p>
-            <strong>Location:</strong> {technician.location.lat.toFixed(4)},{" "}
-            {technician.location.lng.toFixed(4)}
-          </p>
-        )}
-      <div>
-      <h2>Technician Dashboard</h2>
-      {technician && (
         <div>
-          <p><strong>Name:</strong> {technician.name}</p>
-          <p><strong>Service:</strong> {technician.service}</p>
-          {technician.location && (
-            <p>
-              <strong>Location:</strong> {technician.location.lat.toFixed(4)}, {technician.location.lng.toFixed(4)}
-            </p>
+          <h2>Technician Dashboard</h2>
+          {technician && (
+            <div>
+              <p>
+                <strong>Name:</strong> {technician.name}
+              </p>
+              <p>
+                <strong>Service:</strong> {technician.service}
+              </p>
+              {technician?.location && (
+                <p>
+                  <strong>Location:</strong>{" "}
+                  {technician.location.lat?.toFixed(4)},{" "}
+                  {technician.location.lng?.toFixed(4)}
+                </p>
+              )}
+              <button onClick={toggleOnlineStatus}>
+                Go {online ? "Offline" : "Online"}
+              </button>
+              <br />
+              <Link to='/edit-profile'>Edit Profile</Link> |{" "}
+              <Link to='/notifications'>Notifications</Link> |{" "}
+              <Link to='/task-history'>Task History</Link> |{" "}
+              <Link to='/reviews'>My Reviews</Link> |{" "}
+              <Link to='/earnings'>Earnings</Link> |{" "}
+              <Link to='/availability'>Availability</Link> |{" "}
+              <Link to='/settings'>Settings</Link> |{" "}
+              <Link to='/track-location'>Track Location</Link> |{" "}
+              <Link to='/scheduled-tasks'>Scheduled Tasks</Link> |{" "}
+              <Link to='/analytics'>Analytics</Link> |{" "}
+              <Link to='/map-view'>Map View</Link> |{" "}
+              <Link to='/live-location'>Live Location</Link> |{" "}
+              <Link to='/earnings-dashboard'>Earnings Dashboard</Link> |{" "}
+              <Link to='/service-pricing'>Service Pricing</Link> |{" "}
+              <Link to='/call-technician'>Call Technician</Link>
+            </div>
           )}
-          <button onClick={toggleOnlineStatus}>
-            Go {online ? "Offline" : "Online"}
-          </button>
-          <br />
-          <Link to="/edit-profile">Edit Profile</Link> |{" "}
-          <Link to="/notifications">Notifications</Link> |{" "}
-          <Link to="/task-history">Task History</Link> |{" "}
-          <Link to="/reviews">My Reviews</Link> |{" "}
-          <Link to="/earnings">Earnings</Link> |{" "}
-          <Link to="/availability">Availability</Link> |{" "}
-          <Link to="/settings">Settings</Link> |{" "}
-          <Link to="/track-location">Track Location</Link> |{" "}
-          <Link to="/scheduled-tasks">Scheduled Tasks</Link> |{" "}
-          <Link to="/analytics">Analytics</Link> |{" "}
-          <Link to="/map-view">Map View</Link> |{" "}
-          <Link to="/live-location">Live Location</Link> |{" "}
-          <Link to="/earnings-dashboard">Earnings Dashboard</Link> |{" "}
-          <Link to="/service-pricing">Service Pricing</Link> |{" "}
-          <Link to="/call-technician">Call Technician</Link>
-        </div>
-      )}
 
-      <h3>Assigned Tasks</h3>
-      {tasks.length > 0 ? (
-        tasks.map((task) => (
-          <div key={task.id} style={{ border: "1px solid #ccc", margin: "10px", padding: "10px" }}>
-            <h4>{task.title}</h4>
-            <p><strong>Status:</strong> {task.status}</p>
-            <Link to={`/task/${task.id}`}>View Details</Link>
-            {task.status === "pending" && (
-              <div>
-                <button onClick={() => acceptTask(task.id)}>Accept</button>
-                <button onClick={() => rejectTask(task.id)}>Reject</button>
+          <h3>Assigned Tasks</h3>
+          {tasks.length > 0 ? (
+            tasks.map((task) => (
+              <div
+                key={task.id}
+                style={{
+                  border: "1px solid #ccc",
+                  margin: "10px",
+                  padding: "10px",
+                }}
+              >
+                <h4>{task.title}</h4>
+                <p>
+                  <strong>Status:</strong> {task.status}
+                </p>
+                <Link to={`/task/${task.id}`}>View Details</Link>
+                {task.status === "pending" && (
+                  <div>
+                    <button onClick={() => acceptTask(task.id)}>Accept</button>
+                    <button onClick={() => rejectTask(task.id)}>Reject</button>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        ))
-      ) : (
-        <p>No tasks assigned yet.</p>
-      )}
+            ))
+          ) : (
+            <p>No tasks assigned yet.</p>
+          )}
 
-      <h3>General Chat</h3>
-      <Chat chatId={auth.currentUser?.uid} />
-    </div>
+          <h3>General Chat</h3>
+          <Chat chatId={auth.currentUser?.uid} />
+        </div>
 
         <div className='thsp'></div>
         <p>
