@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import backarrow from "../assets/backwardarrow.svg";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { get, onValue, ref } from "firebase/database";
-import { db } from "../utilities/firebaseConfig";
+import { auth, db } from "../utilities/firebaseConfig";
 import Chat from "./message_details";
 import TaskProgressUpdate from "./TaskProgressUpdate";
 
@@ -20,6 +20,7 @@ function TaskDetails() {
       }
     });
   }, [taskId]);
+
 
   if (!task) return <p>Loading job details...</p>;
 
