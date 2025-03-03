@@ -51,7 +51,9 @@ const Dashboard = () => {
     if (!auth.currentUser) return;
     const newStatus = !online;
     setOnline(newStatus);
-    update(ref(db, `technicians/${auth.currentUser.uid}`), { online: newStatus });
+    update(ref(db, `technicians/${auth.currentUser.uid}`), {
+      online: newStatus,
+    });
   };
 
   const acceptTask = (taskId) => {
@@ -65,42 +67,49 @@ const Dashboard = () => {
   return (
     <>
       {isOpen && (
-        <div className="sidebar-container" onClick={() => setIsOpen(false)}>
+        <div className='sidebar-container' onClick={() => setIsOpen(false)}>
           <div className={`sidebar ${isOpen ? "open" : ""}`}>
-            <button className="toggle-btn" onClick={() => setIsOpen(false)}>
+            <button className='toggle-btn' onClick={() => setIsOpen(false)}>
               <X size={24} />
             </button>
-            <h1 className="techdashgreet">{technician?.fullName || "Loading..."}</h1>
-            <div className="divider"></div>
-            <div className="thesidelinks">
-              <Link to="/dashboard">Home</Link>
-              <Link to="/task">Task</Link>
-              <Link to="/earning">Earning</Link>
-              <Link to="/profile">Profile</Link>
-              <Link to="/edit-profile">Edit Profile</Link>
-              <Link to="/notifications">Notifications</Link>
-              <Link to="/task-history">Task History</Link>
-              <Link to="/reviews">My Reviews</Link>
-              <Link to="/availability">Availability</Link>
-              <Link to="/settings">Settings</Link>
+            <h1 className='techdashgreet'>
+              {technician?.fullName || "Loading..."}
+            </h1>
+            <div className='divider'></div>
+            <div className='thesidelinks'>
+              <Link to='/dashboard'>Home</Link>
+              <Link to='/task'>Task</Link>
+              <Link to='/earning'>Earning</Link>
+              <Link to='/profile'>Profile</Link>
+              <Link to='/edit-profile'>Edit Profile</Link>
+              <Link to='/notifications'>Notifications</Link>
+              <Link to='/task-history'>Task History</Link>
+              <Link to='/reviews'>My Reviews</Link>
+              <Link to='/availability'>Availability</Link>
+              <Link to='/settings'>Settings</Link>
             </div>
           </div>
         </div>
       )}
 
-      <div className="techdash">
-        <button className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
+      <div className='techdash'>
+        <button className='toggle-btn' onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         <h2>Technician Dashboard</h2>
         {technician ? (
           <>
-            <p><strong>Name:</strong> {technician.fullName}</p>
-            <p><strong>Service:</strong> {technician.service}</p>
+            <p>
+              <strong>Name:</strong> {technician.fullName}
+            </p>
+            <p>
+              <strong>Service:</strong> {technician.service}
+            </p>
             {technician?.location && (
               <p>
-                <strong>Location:</strong> {technician.location.lat?.toFixed(4)}, {technician.location.lng?.toFixed(4)}
+                <strong>Location:</strong> {technician.location.lat?.toFixed(4)}
+                , {technician.location.lng?.toFixed(4)}
               </p>
             )}
             <button onClick={toggleOnlineStatus}>
@@ -114,10 +123,12 @@ const Dashboard = () => {
         <h3>Assigned Tasks</h3>
         {tasks.length > 0 ? (
           tasks.map((task) => (
-            <div key={task.id} className="task-card">
+            <div key={task.id} className='task-card'>
               <h4>{task.title}</h4>
-              <p><strong>Status:</strong> {task.status}</p>
-              <Link to={`/task/${task.id}`}>View Details</Link>
+              <p>
+                <strong>Status:</strong> {task.status}
+              </p>
+              <Link to={`/task_details/${task.id}`}>View Details</Link>
               {task.status === "pending" && (
                 <div>
                   <button onClick={() => acceptTask(task.id)}>Accept</button>

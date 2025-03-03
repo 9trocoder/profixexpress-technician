@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import backarrow from "../assets/backwardarrow.svg";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { get, ref } from "firebase/database";
+import { get, onValue, ref } from "firebase/database";
 import { db } from "../utilities/firebaseConfig";
 import Chat from "./message_details";
 import TaskProgressUpdate from "./TaskProgressUpdate";
@@ -10,14 +10,35 @@ function TaskDetails() {
   const { taskId } = useParams();
   const [task, setTask] = useState(null);
   const navigate = useNavigate();
+
   useEffect(() => {
+    if (!taskId) {
+      console.error("No taskId provided.");
+      return;
+    }
+
     const taskRef = ref(db, `jobs/${taskId}`);
-    get(taskRef).then((snapshot) => {
-      if (snapshot.exists()) {
-        setTask(snapshot.val());
+    console.log("Fetching task data from:", `jobs/${taskId}`);
+
+    const unsubscribe = onValue(
+      taskRef,
+      (snapshot) => {
+        if (snapshot.exists()) {
+          console.log("Task found:", snapshot.val());
+          setTask(snapshot.val());
+        } else {
+          console.warn("No task found for taskId:", taskId);
+          setTask(null);
+        }
+      },
+      (error) => {
+        console.error("Error fetching task data:", error);
       }
-    });
+    );
+
+    return () => unsubscribe(); // Cleanup the listener
   }, [taskId]);
+
 
   if (!task) return <p>Loading task details...</p>;
 
