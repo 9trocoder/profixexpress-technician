@@ -5,48 +5,33 @@ import tcalendar from "../assets/tcalendar.svg";
 import tlocation from "../assets/tlocation.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db, get, ref } from "../utilities/firebaseConfig";
-
 import { Menu, X } from "lucide-react";
 import { onValue, update } from "firebase/database";
 
 export const taskbtnlist = [
-  {
-    id: 0,
-    name: "All",
-  },
-  {
-    id: 1,
-    name: "New task",
-  },
-  {
-    id: 2,
-    name: "Pending",
-  },
-  {
-    id: 3,
-    name: "In Progress",
-  },
-  {
-    id: 4,
-    name: "Completed",
-  },
+  { id: 0, name: "All" },
+  { id: 1, name: "New task" },
+  { id: 2, name: "Pending" },
+  { id: 3, name: "In Progress" },
+  { id: 4, name: "Completed" },
 ];
 
 function Task() {
   const [activenav, setActivena] = useState("All");
   const [isOpen, setIsOpen] = useState(false);
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [technician, setTechnician] = useState(null);
   const [online, setOnline] = useState(false);
   const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     const user = auth.currentUser;
     if (!user) {
       navigate("/");
       return;
     }
+
+    // Fetch technician data
     const technicianRef = ref(db, `technicians/${user.uid}`);
     get(technicianRef).then((snapshot) => {
       if (snapshot.exists()) {
@@ -55,6 +40,8 @@ function Task() {
         setOnline(techData.online);
       }
     });
+
+    // Listen for job tasks assigned to this technician
     const tasksRef = ref(db, "jobs");
     onValue(tasksRef, (snapshot) => {
       if (snapshot.exists()) {
@@ -77,10 +64,11 @@ function Task() {
   const rejectTask = (taskId) => {
     update(ref(db, `jobs/${taskId}`), { status: "rejected" });
   };
+
   return (
     <>
       {isOpen && (
-        <div className=''>
+        <div>
           <div
             className='sidebar-container'
             onClick={() => setIsOpen(!isOpen)}
@@ -90,7 +78,9 @@ function Task() {
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
             <div className='thsp'></div>
-            <h1 className='techdashgreet'>{technician.fullName}</h1>
+            <h1 className='techdashgreet'>
+              {technician && technician.fullName}
+            </h1>
             <div className='thsp'></div>
             <div className='divider'></div>
             <div className='thsp'></div>
@@ -128,7 +118,7 @@ function Task() {
           <div className='tasksearch'>
             <input type='text' placeholder='Search here...' />
             <button className='filterbtn'>
-              <img src={filtericon} alt='' srcSet='' />
+              <img src={filtericon} alt='Filter' />
             </button>
           </div>
           <div className='tasknav'>
@@ -144,7 +134,6 @@ function Task() {
               </button>
             ))}
           </div>
-
           <p className='taskpropss'>{activenav} Task</p>
         </div>
 
@@ -158,18 +147,18 @@ function Task() {
                 <div className='divider'></div>
                 <div className='taskprops'>
                   <div className='taskpropsitem'>
-                    <img src={tcalendar} alt='' srcset='' />
-                    <label htmlFor=''>{task.date}</label>
+                    <img src={tcalendar} alt='Calendar' />
+                    <label>{task.date}</label>
                   </div>
                   <div className='taskpropsitem'>
-                    <img src={ttime} alt='' srcset='' />
-                    <label htmlFor=''>
+                    <img src={ttime} alt='Time' />
+                    <label>
                       {task.time} {task.duration}
                     </label>
                   </div>
                   <div className='taskpropsitem'>
-                    <img src={tlocation} alt='' srcset='' />
-                    <label htmlFor=''>{task.address}</label>
+                    <img src={tlocation} alt='Location' />
+                    <label>{task.address}</label>
                   </div>
                 </div>
                 <p>
@@ -177,10 +166,16 @@ function Task() {
                 </p>
 
                 <div className='taskpropsbtn'>
-                  <button className='tpbaccept' onClick={acceptTask(task.id)}>
+                  <button
+                    className='tpbaccept'
+                    onClick={() => acceptTask(task.id)}
+                  >
                     Accept
                   </button>
-                  <button className='tpbdecline' onClick={rejectTask(task.id)}>
+                  <button
+                    className='tpbdecline'
+                    onClick={() => rejectTask(task.id)}
+                  >
                     Decline
                   </button>
                 </div>
@@ -189,42 +184,6 @@ function Task() {
           ) : (
             <p>No tasks assigned yet.</p>
           )}
-          {activenav === "All" && tasks.length > 0 ? (
-            tasks.map((task) => (
-              <div className='taskalertmain' key={task.id}>
-                <p className='tasktitle'>{task.title}</p>
-                <p className='taskparam'>{task.info}</p>
-                <div className='divider'></div>
-                <div className='taskprops'>
-                  <div className='taskpropsitem'>
-                    <img src={tcalendar} alt='' srcset='' />
-                    <label htmlFor=''>{task.date}</label>
-                  </div>
-                  <div className='taskpropsitem'>
-                    <img src={ttime} alt='' srcset='' />
-                    <label htmlFor=''>
-                      {task.time} {task.duration}
-                    </label>
-                  </div>
-                  <div className='taskpropsitem'>
-                    <img src={tlocation} alt='' srcset='' />
-                    <label htmlFor=''>{task.address}</label>
-                  </div>
-                </div>
-                <div className='taskpropsbtn'>
-                  <button
-                    className='tpbaccept'
-                    onClick={() => navigate(`/task_details/${task.id}`)}
-                  >
-                    View Task Details
-                  </button>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p>No tasks assigned yet.</p>
-          )}
-
           <div className='thespace'></div>
         </div>
       </div>

@@ -54,7 +54,7 @@ function App() {
         <Route path='/info_two' element={<InfopageTwo />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/task' element={<Task />} />
-        <Route path='/task_details/:id' element={<TaskDetails />} />
+        <Route path='/task_details/:taskId' element={<TaskDetails />} />
         {/* <Route path='/message' element={<Message />} />
         <Route path='/message_details' element={<MessageDetails />} /> */}
         <Route path='/edit-profile' element={<EditProfile />} />

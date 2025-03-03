@@ -1,12 +1,12 @@
-import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "./Auth";
+// import React from "react";
+// import { Navigate, Outlet } from "react-router-dom";
+// import { useAuth } from "./Auth";
 
 
-const ProtectedRoute = () => {
-  const { user } = useAuth();
-  return user ? <Outlet /> : <Navigate to="/login" />;
-};
+// const ProtectedRoute = () => {
+//   const { user } = useAuth();
+//   return user ? <Outlet /> : <Navigate to="/login" />;
+// };
 
 
-export default ProtectedRoute;
+// export default ProtectedRoute;

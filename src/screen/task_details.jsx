@@ -10,37 +10,18 @@ function TaskDetails() {
   const { taskId } = useParams();
   const [task, setTask] = useState(null);
   const navigate = useNavigate();
+  const [job, setJob] = useState(null);
 
   useEffect(() => {
-    if (!taskId) {
-      console.error("No taskId provided.");
-      return;
-    }
-
-    const taskRef = ref(db, `jobs/${taskId}`);
-    console.log("Fetching task data from:", `jobs/${taskId}`);
-
-    const unsubscribe = onValue(
-      taskRef,
-      (snapshot) => {
-        if (snapshot.exists()) {
-          console.log("Task found:", snapshot.val());
-          setTask(snapshot.val());
-        } else {
-          console.warn("No task found for taskId:", taskId);
-          setTask(null);
-        }
-      },
-      (error) => {
-        console.error("Error fetching task data:", error);
+    const jobRef = ref(db, `jobs/${taskId}`);
+    get(jobRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        setTask(snapshot.val());
       }
-    );
-
-    return () => unsubscribe(); // Cleanup the listener
+    });
   }, [taskId]);
 
-
-  if (!task) return <p>Loading task details...</p>;
+  if (!task) return <p>Loading job details...</p>;
 
   return (
     <div className='taskdecnt'>
