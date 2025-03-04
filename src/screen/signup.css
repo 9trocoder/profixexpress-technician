@@ -41,7 +41,8 @@
   color: #000000;
 }
 
-.inputcnt input, .inputcnt select {
+.inputcnt input,
+.inputcnt select {
   border: 1px solid #dcdcdc;
   padding: 16px 17px;
   margin-bottom: 20px;
@@ -86,7 +87,7 @@
   letter-spacing: -2%;
   text-align: center;
   color: #16291e;
-  width:100%;
+  width: 100%;
   border: none;
   cursor: pointer;
   margin-top: 30px;
@@ -94,21 +95,20 @@
 }
 
 .forgotpassworkclick span {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .signup_dividetime {
-    display: flex;
-    gap: 16px;
+  display: flex;
+  gap: 16px;
 }
 
 .formtitle {
-    font-family: Instrument Sans;
-font-weight: 500;
-font-size: 16px;
-line-height: 26.24px;
-letter-spacing: -2%;
-color: #A2AAA5;
-margin-bottom: 10px;
-
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26.24px;
+  letter-spacing: -2%;
+  color: #a2aaa5;
+  margin-bottom: 10px;
 }
