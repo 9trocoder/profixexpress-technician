@@ -438,7 +438,7 @@
   position: fixed;
   top: 0; /* Initially hidden */
   width: 100%;
-  max-width: 300px;
+  max-width: 600px;
   height: 100vh;
   background: #fff;
   padding: 20px;
@@ -765,4 +765,974 @@
   border: 1px solid #dcdcdc;
   padding: 10px 12px;
   border-radius: 16px;
+}
+
+
+
+
+
+
+.bookingpagecnt {
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+  padding:30px 16px 16px 16px;
+}
+
+.techdashbtmcnt {
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.bookingpagechatcnt {
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 16px 0px 16px 0px;
+}
+
+.bookingtitle {
+  font-family: Instrument Serif;
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 72.8px;
+  letter-spacing: 0%;
+  color: #16291e;
+}
+
+.bookingpara {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26.24px;
+  letter-spacing: -2%;
+  text-align: center;
+  color: #16291e;
+}
+
+.thegap {
+  height: 20px;
+}
+
+.thebiggap {
+  height: 50px;
+}
+
+.bookingcat {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #a2aaa5;
+  overflow-x: scroll;
+  gap: 20px;
+}
+
+.bookingcatbtn {
+  text-wrap: nowrap;
+  padding: 10px;
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 26.24px;
+  letter-spacing: -2%;
+  text-align: center;
+  color: #16291e;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.bookcatbtnactive {
+  border-bottom: 2px solid #80ffb5;
+  font-weight: 600;
+}
+
+.bookcatbtnnotactive {
+  border-bottom: 2px solid #fff;
+}
+
+.bookcatserv {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bookcatservbtn {
+  border: 1px solid #16291e;
+  padding: 5px 20px;
+  background-color: transparent;
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24.8px;
+  letter-spacing: -2%;
+  text-align: center;
+  color: #16291e;
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+.bookactivetask {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.bookactivetasktitle {
+  font-family: Instrument Serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 110.00000000000001%;
+  letter-spacing: -1%;
+
+  color: #16291e;
+}
+
+.bookactivetask a {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 100%;
+  letter-spacing: -2%;
+  text-align: right;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 0%;
+  text-decoration-skip-ink: auto;
+  color: #16291e;
+}
+
+.activetaskcnttop {
+  background: #fff;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  padding: 20px 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dasbse {
+  background-color: #fafafa !important;
+}
+
+.taskinprogress {
+  border-left: 6px solid #008000;
+}
+
+.taskschedule {
+  border-left: 6px solid blue;
+}
+
+.taskpending {
+  border-left: 6px solid yellow;
+}
+
+.taskrejected {
+  border-left: 6px solid red;
+}
+
+.activetaskcnt {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+.actjobtitle {
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: -2%;
+  color: #16291e;
+}
+
+.btsdetitemm {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2px;
+}
+
+.btsdeticonn {
+  width: 16px;
+  height: 16px;
+}
+
+.mytaskviewtbtn {
+  width: min-content !important;
+  text-wrap: nowrap !important;
+}
+
+.btstsleftprofimgg {
+  height: 42px;
+  width: 42px;
+}
+
+.mytaskcntitem-rightname {
+  font-family: Instrument Serif;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 100%;
+  letter-spacing: -1%;
+  color: #16291e;
+}
+
+.btsdettlabell {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 164%;
+  letter-spacing: -2%;
+  color: #7f8983;
+}
+
+.activetaskimgg {
+  width: 42px !important;
+  height: 42px;
+}
+
+.activetasknamee {
+  font-family: Instrument Serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: -1%;
+  color: #16291e;
+  text-align: center;
+}
+
+.wlitoprgreen {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: #20945d;
+  color: #fff;
+  width: min-content;
+  padding: 4px 7px;
+  border-radius: 20px;
+}
+
+.wlitopryellow {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: #f7bb09;
+
+  color: #fff;
+  width: min-content;
+  padding: 4px 7px;
+  border-radius: 20px;
+}
+
+.ratingnum {
+  color: #fff;
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: -2%;
+}
+
+.mytaskcntitem-rightt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.mytaskviewtbtnn {
+  width: min-content;
+  text-wrap: nowrap;
+  gap: 10px;
+  border-radius: 16px;
+  padding-top: 16px;
+  padding-right: 19px;
+  padding-bottom: 16px;
+  padding-left: 19px;
+  border: none;
+  background-color: #80ffb5;
+  cursor: pointer;
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: -2%;
+  color: #16291e;
+}
+
+.backicon {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.jdetailstitle {
+  font-family: Instrument Serif;
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 110.00000000000001%;
+  letter-spacing: -1%;
+  color: #16291e;
+}
+
+.jdetailsstatus {
+  background: #edf6f2;
+  width: min-content;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.jdboxcircle {
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+}
+
+.acceptedbx {
+  background-color: #1877f2;
+}
+
+.accepted {
+  color: #1877f2;
+  text-transform: capitalize;
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: -2%;
+  text-align: center;
+}
+
+.jdetailscnt {
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: -2%;
+  color: #16291e;
+}
+
+.jdetailsitems {
+  display: flex;
+  flex-direction: column;
+}
+
+.jdtsitem {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 20px 0px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.jdtsitemleft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.jdtsitemlefticon {
+  width: 17px;
+  height: 17px;
+}
+
+.jdtsitempar {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 164%;
+  letter-spacing: -2%;
+  color: #79827c;
+}
+
+.jdtsitemapars,
+.jtsitpar {
+  font-family: Instrument Sans;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 164%;
+  letter-spacing: -2%;
+  color: #16291e;
+}
+
+.jtsitpal {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 164%;
+  letter-spacing: -2%;
+  color: #79827c;
+}
+
+.jdtsitemrightitem {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 50px;
+  margin-bottom: 10px;
+}
+
+.jdtsitemrightparcnt {
+  width: 100%;
+  max-width: 434px;
+  height: 128px;
+  border: 1px solid #16291e33;
+  border-radius: 12px;
+  padding: 12px;
+  overflow-y: scroll;
+}
+
+.jdtsitemaparss {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 164%;
+  letter-spacing: -2%;
+  color: #16291e99;
+}
+
+.jdetailstech {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 164%;
+  letter-spacing: -2%;
+  color: #a2aaa5;
+}
+
+.jdtechas {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.jdtechasleft {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.jdtechimg {
+  box-shadow: 0px 9.13px 41.97px 0px #16291e1a;
+  width: 146px;
+  height: 146px;
+  border-radius: 146px;
+  object-fit: cover;
+  object-position: center;
+  border: 8px solid #fff;
+}
+
+.jdtechproname {
+  font-family: Instrument Serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: -1%;
+  color: #16291e;
+}
+
+.jdtechpro {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.jdtechgreat {
+  background: #e3ffef;
+  padding: 4px 7px;
+  border-radius: 6px;
+  width: min-content;
+  text-wrap: nowrap;
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 164%;
+  letter-spacing: 0%;
+  color: #33925b;
+}
+
+.jdtechasright {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.jdtechviewpro {
+  border: 1px solid #a2aaa5;
+  padding: 16px 19px;
+  border-radius: 16px;
+  background-color: transparent;
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: -2%;
+  color: #16291e;
+  cursor: pointer;
+}
+
+.jdtechopenchat {
+  border: 1px solid #a2aaa5;
+  background: #80ffb5;
+  padding: 16px 19px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: -2%;
+  text-align: center;
+  color: #16291e;
+}
+
+.profilemodal {
+  position: fixed;
+  background: #00000066;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 130;
+  display: flex;
+  align-items: end;
+}
+
+.profilebody {
+  position: fixed;
+  background-color: #fff;
+  height: 100vh;
+  width: 100%;
+  max-width: 700px;
+  padding: 16px;
+  z-index: 140;
+  right: 0;
+}
+
+.profiletop {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.closemodalcnt {
+  margin-left: auto;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+}
+
+.thesepare {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.divider {
+  margin: 10px 0px;
+  width: 100%;
+  border: 0.5px solid #d2caca66;
+}
+
+.jdtechminum {
+  background: #ffeeca;
+  padding: 4px 11px;
+  border-radius: 6px;
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 164%;
+  letter-spacing: 0%;
+  color: #7d6b44;
+}
+
+.profiletopic {
+  color: #16291e;
+  font-family: Instrument Sans;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 164%;
+  letter-spacing: -2%;
+}
+
+.profilesentence {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 164%;
+  letter-spacing: -2%;
+  color: #48534c;
+}
+
+.chatcnt {
+  height: 90vh;
+  background-color: #fafafa;
+  padding: 16px;
+  padding-bottom: 150px;
+
+  overflow-y: scroll;
+}
+.techdashbtm {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0px -6px 12.5px -7px #0000001a;
+  z-index: 145px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.techdashbtmcnt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0 16px;
+}
+
+.thetypemsg {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  align-items: center;
+}
+
+.thetypemsg input {
+  width: 100%;
+  border: none;
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 17.08px;
+  letter-spacing: -2%;
+  background-color: transparent;
+  outline: none;
+}
+
+.thetypemsg input::placeholder {
+  color: #c3c3c3;
+}
+
+.imgbtn {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #16291e0d;
+}
+
+.thetypemsg {
+  border: 1px solid #dcdcdc;
+  padding: 10px 12px;
+  border-radius: 16px;
+}
+
+.chatbackbtn {
+  margin-left: 16px;
+}
+
+.thecurrentuser {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.notthecurrentuser {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.thetapisncnt {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.thetapins {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.notthetapins {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.thecurrentuserbg {
+  background: #16291e;
+  display: flex;
+  justify-content: flex-end;
+  padding: 6px 13px;
+
+  width: max-content;
+  max-width: 250px;
+  border-radius: 12px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.notthecurrentuserbg {
+  background: #ebebeb;
+  display: flex;
+  justify-content: flex-end;
+  padding: 6px 13px;
+
+  width: max-content;
+  max-width: 250px;
+  border-radius: 12px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.thecurrentuserbg p {
+  color: #fff;
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -2%;
+}
+
+.notthecurrentuserbg p {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -2%;
+  color: #16291e;
+}
+
+.thesendername {
+  font-size: 8px;
+}
+
+.thesendertime {
+  font-size: 8px;
+}
+
+.mytaskviewbtnrepost {
+  border-radius: 16px;
+  padding-top: 16px;
+  padding-right: 19px;
+  padding-bottom: 16px;
+  padding-left: 19px;
+  border-width: 1px;
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: -2%;
+  border: 1px solid #16291e;
+  color: #16291e;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.thesepbtn {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+}
+
+.thechoose {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.selectactive {
+  background: #80ffb5;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 16px;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  border: 2px solid #80ffb5;
+}
+
+.selectactive .seact {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.selectactive .seactn {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.selectnotactive {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 16px;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  border: 2px solid #16291e;
+}
+
+.selectnotactive .seact {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.selectnotactive .seactn {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.custom-file-input input[type="file"] {
+  display: none;
+}
+
+.custom-file-input label {
+  background-color: transparent;
+  width: 100px;
+  height: 100px;
+  color: #16291e;
+  border: 2px solid #16291e;
+  padding: 10px 16px;
+  font-size: 16px;
+  cursor: pointer;
+
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 54px;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-input label:hover {
+  border: 2px solid #80ffb5;
+  color: #80ffb5;
+}
+
+.upload-icon {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.theimageinputcnt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.preview-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.preview-item {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.previewimg {
+  width: 100px;
+  height: 100px;
+  border-radius: 16px;
+  border: 2px solid #80ffb5;
+  cursor: pointer;
+  object-fit: cover;
+  object-position: center;
+}
+
+.imgdeleteicon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #16291e;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+
+.inputcnt textarea {
+  border: 1px solid #dcdcdc;
+  padding: 16px 17px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 16px !important;
+  line-height: 19.52px;
+  letter-spacing: -2%;
+  outline: none;
+}
+
+.thebookingnav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.thebookingnavright {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.bookingnotificationicon {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  
+}
+
+.bookingprofimg {
+  width: 36px;
+  height: 36px;
+  padding: 3px;
+  border: 1px solid #E0E0E0;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.profimg {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 12px;
 }

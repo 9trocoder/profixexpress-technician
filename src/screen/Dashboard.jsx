@@ -9,6 +9,8 @@ import tlocation from "../assets/tlocation.svg";
 import { Menu, X } from "lucide-react";
 import { ref, onValue, update } from "firebase/database";
 import Chat from "./message_details";
+import profileimg from "../assets/profileimg.png";
+import notificationicon from "../assets/notificationicon.svg";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -16,6 +18,8 @@ const Dashboard = () => {
   const [online, setOnline] = useState(false);
   const [technician, setTechnician] = useState(null);
   const [tasks, setTasks] = useState([]);
+  const [pendingCount, setPendingCount] = useState(0);
+  const [pendingJobs, setPendingJobs] = useState([]);
 
   useEffect(() => {
     const user = auth.currentUser;
@@ -23,6 +27,9 @@ const Dashboard = () => {
       navigate("/");
       return;
     }
+
+    const technicianId = auth.currentUser ? auth.currentUser.uid : null;
+    if (!technicianId) return;
 
     // Fetch technician details
     const technicianRef = ref(db, `technicians/${user.uid}`);
@@ -42,6 +49,12 @@ const Dashboard = () => {
           id,
           ...task,
         }));
+        const pendingJobs = tasksData.filter(
+          (task) =>
+            task.technicianId === technicianId && task.status === "pending"
+        );
+        setPendingJobs(pendingJobs);
+        setPendingCount(pendingJobs.length);
         setTasks(tasksData.filter((task) => task.technicianId === user.uid));
       }
     });
@@ -100,42 +113,50 @@ const Dashboard = () => {
         </div>
       )}
 
-      <div className='techdash'>
-        <button className='toggle-btn' onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+      <div className='bookingpagecnt'>
+        {isOpen ? (
+          ""
+        ) : (
+          <div className='thebookingnav'>
+            <button className='toggle-btn' onClick={() => setIsOpen(!isOpen)}>
+              <Menu size={24} />
+            </button>
+            <div className='thebookingnavright'>
+              <button className='bookingnotificationicon'>
+                <img src={notificationicon} alt='' srcset='' />
+              </button>
+              <button className='bookingprofimg'>
+                <img src={profileimg} alt='' className='profimg' />
+              </button>
+            </div>
+          </div>
+        )}
 
-        <h2>Technician Dashboard</h2>
         {technician ? (
           <>
+          <div className="thegap"></div>
+            <h1 className='bookingtitle'>Hi {technician.fullName}</h1>
             <p>
-              <strong>Name:</strong> {technician.fullName}
+              You have {pendingCount} pending task and {tasks.length} tasks to complete
             </p>
-            <p>
-              <strong>Service:</strong> {technician.service}
-            </p>
-            {technician?.location && (
-              <p>
-                <strong>Location:</strong> {technician.location.lat?.toFixed(4)}
-                , {technician.location.lng?.toFixed(4)}
-              </p>
-            )}
-            <button onClick={toggleOnlineStatus}>
+           
+            {/* <button onClick={toggleOnlineStatus}>
               {online ? "Go Offline" : "Go Online"}
-            </button>
+            </button> */}
           </>
         ) : (
           <p>Loading technician info...</p>
         )}
 
-        <h3>Assigned Tasks</h3>
-        {tasks.length > 0 ? (
-          tasks.map((task) => (
+        <h3>Pending Tasks</h3>
+        {pendingJobs.length > 0 ? (
+          pendingJobs.map((task) => (
             <div key={task.id} className='task-card'>
               <h4>{task.title}</h4>
               <p>
                 <strong>Status:</strong> {task.status}
               </p>
+              <p>{task.address}</p>
               <Link to={`/task_details/${task.id}`}>View Details</Link>
               {task.status === "pending" && (
                 <div>
