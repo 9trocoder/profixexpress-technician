@@ -198,6 +198,7 @@ function Task() {
               </button>
             ))}
           </div>
+          
         </div>
         <div className='thegap'></div>
         <p className='thetops'>{activenav} Task</p>
@@ -325,8 +326,6 @@ function Task() {
                     <label>{task.address}</label>
                   </div>
                 </div>
-
-               
               </div>
             ))
           ) : (
@@ -353,21 +352,6 @@ function Task() {
                     <img src={tlocation} alt='Location' />
                     <label>{task.address}</label>
                   </div>
-                </div>
-
-                <div className='taskpropsbtn'>
-                  <button
-                    className='tpbaccept'
-                    onClick={() => acceptTask(task.id)}
-                  >
-                    Accept
-                  </button>
-                  <button
-                    className='tpbdecline'
-                    onClick={() => rejectTask(task.id)}
-                  >
-                    Decline
-                  </button>
                 </div>
               </div>
             ))
