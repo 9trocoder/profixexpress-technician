@@ -307,7 +307,7 @@ function Task() {
             completedTasks.map((task) => (
               <div className='taskalertmain' key={task.id}>
                 <p className='tasktitle'>{task.title}</p>
-                <p className='taskparam'>{task.description}</p>
+                <p className='taskparam'>Task ID: {task.id}</p>
                 <div className='divider'></div>
                 <div className='taskprops'>
                   <div className='taskpropsitem'>
@@ -326,20 +326,7 @@ function Task() {
                   </div>
                 </div>
 
-                <div className='taskpropsbtn'>
-                  <button
-                    className='tpbaccept'
-                    onClick={() => acceptTask(task.id)}
-                  >
-                    Accept
-                  </button>
-                  <button
-                    className='tpbdecline'
-                    onClick={() => rejectTask(task.id)}
-                  >
-                    Decline
-                  </button>
-                </div>
+               
               </div>
             ))
           ) : (
