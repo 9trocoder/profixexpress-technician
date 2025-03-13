@@ -180,6 +180,8 @@
   padding: 16px;
   border-radius: 12px;
   background-color: #fff;
+  border: 1px solid #ececec;
+  box-shadow: 0px 4px 37.8px 0px #0000000d;
 }
 
 .tasktitle {
@@ -767,16 +769,11 @@
   border-radius: 16px;
 }
 
-
-
-
-
-
 .bookingpagecnt {
   width: 100%;
   max-width: 750px;
   margin: 0 auto;
-  padding:30px 16px 16px 16px;
+  padding: 30px 16px 16px 16px;
 }
 
 .techdashbtmcnt {
@@ -1681,7 +1678,6 @@
   cursor: pointer;
 }
 
-
 .inputcnt textarea {
   border: 1px solid #dcdcdc;
   padding: 16px 17px;
@@ -1714,14 +1710,13 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  
 }
 
 .bookingprofimg {
   width: 36px;
   height: 36px;
   padding: 3px;
-  border: 1px solid #E0E0E0;
+  border: 1px solid #e0e0e0;
   border-radius: 14px;
   display: flex;
   align-items: center;
@@ -1735,4 +1730,28 @@
   object-fit: cover;
   object-position: center;
   border-radius: 12px;
+}
+
+.thetops {
+  color: #16291e;
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 155%;
+  letter-spacing: -1%;
+}
+
+.taskpropss {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.taskpropss p {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: -1%;
+  color: #16291e;
 }

@@ -20,6 +20,7 @@ const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
   const [pendingCount, setPendingCount] = useState(0);
   const [pendingJobs, setPendingJobs] = useState([]);
+  const [activeJobs, setActiveJobs] = useState([]);
 
   useEffect(() => {
     const user = auth.currentUser;
@@ -53,7 +54,13 @@ const Dashboard = () => {
           (task) =>
             task.technicianId === technicianId && task.status === "pending"
         );
+        const activeJobs = tasksData.filter(
+          (task) =>
+            task.technicianId === technicianId && task.status === "active"
+        );
+
         setPendingJobs(pendingJobs);
+        setActiveJobs(activeJobs);
         setPendingCount(pendingJobs.length);
         setTasks(tasksData.filter((task) => task.technicianId === user.uid));
       }
@@ -76,6 +83,34 @@ const Dashboard = () => {
   const rejectTask = (taskId) => {
     update(ref(db, `jobs/${taskId}`), { status: "rejected" });
   };
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    // Arrays for the short names of days and months.
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    // Get the components of the date.
+    const dayName = days[date.getDay()];
+    const monthName = months[date.getMonth()];
+    const day = String(date.getDate()).padStart(2, "0");
+    const year = date.getFullYear();
+
+    return `${dayName}, ${monthName} ${day}, ${year}`;
+  }
 
   return (
     <>
@@ -131,15 +166,15 @@ const Dashboard = () => {
             </div>
           </div>
         )}
-
         {technician ? (
           <>
-          <div className="thegap"></div>
+            <div className='thegap'></div>
             <h1 className='bookingtitle'>Hi {technician.fullName}</h1>
             <p>
-              You have {pendingCount} pending task and {tasks.length} tasks to complete
+              You have {pendingCount} pending task and {tasks.length} tasks to
+              complete
             </p>
-           
+
             {/* <button onClick={toggleOnlineStatus}>
               {online ? "Go Offline" : "Go Online"}
             </button> */}
@@ -147,30 +182,85 @@ const Dashboard = () => {
         ) : (
           <p>Loading technician info...</p>
         )}
-
-        <h3>Pending Tasks</h3>
+        <div className='thebiggap'></div>
+        <p className='thetops'>Pending Tasks</p>
+        <div className='thegap'></div>{" "}
         {pendingJobs.length > 0 ? (
           pendingJobs.map((task) => (
-            <div key={task.id} className='task-card'>
-              <h4>{task.title}</h4>
-              <p>
-                <strong>Status:</strong> {task.status}
-              </p>
-              <p>{task.address}</p>
-              <Link to={`/task_details/${task.id}`}>View Details</Link>
-              {task.status === "pending" && (
-                <div>
-                  <button onClick={() => acceptTask(task.id)}>Accept</button>
-                  <button onClick={() => rejectTask(task.id)}>Reject</button>
+            <div className='taskalertmain' key={task.id}>
+              <p className='tasktitle'>{task.title}</p>
+              <p className='taskparam'>{task.description}</p>
+              <div className='divider'></div>
+              <div className='taskprops'>
+                <div className='taskpropsitem'>
+                  <img src={tcalendar} alt='Calendar' />
+                  <label>{formatDate(task.scheduledDate)}</label>
                 </div>
-              )}
+                <div className='taskpropsitem'>
+                  <img src={ttime} alt='Time' />
+                  <label>
+                    {task.timeOfDay} {task.duration}
+                  </label>
+                </div>
+                <div className='taskpropsitem'>
+                  <img src={tlocation} alt='Location' />
+                  <label>{task.address}</label>
+                </div>
+              </div>
+
+              <div className='taskpropsbtn'>
+                <button
+                  className='tpbaccept'
+                  onClick={() => acceptTask(task.id)}
+                >
+                  Accept
+                </button>
+                <button
+                  className='tpbdecline'
+                  onClick={() => rejectTask(task.id)}
+                >
+                  Decline
+                </button>
+              </div>
             </div>
           ))
         ) : (
           <p>No tasks assigned yet.</p>
         )}
-
-        <h3>General Chat</h3>
+        <div className='thebiggap'></div>
+        <p className='thetops'>Active Tasks</p>
+        <div className='thegap'></div>
+        {activeJobs.length > 0 ? (
+          activeJobs.map((task) => (
+            <div
+              className='taskalertmain'
+              key={task.id}
+              onClick={() => navigate(`/task_details/${task.id}`)}
+            >
+              <p className='tasktitle'>{task.title}</p>
+              <p className='taskparam'>{task.description}</p>
+              <div className='divider'></div>
+              <div className='taskpropss'>
+                <div className=''>
+                  <p>Booked</p>
+                  <div className='taskpropsitem'>
+                    <img src={tcalendar} alt='Calendar' />
+                    <label>{formatDate(task.scheduledDate)}</label>
+                  </div>
+                </div>
+                <div className=''>
+                  <p>Due</p>
+                  <div className='taskpropsitem'>
+                    <img src={tcalendar} alt='Calendar' />
+                    <label>{formatDate(task.scheduledDate)}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No active task yet.</p>
+        )}
       </div>
     </>
   );
