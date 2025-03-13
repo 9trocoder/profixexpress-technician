@@ -21,12 +21,11 @@ function TaskDetails() {
     });
   }, [taskId]);
 
-
   if (!task) return <p>Loading job details...</p>;
 
   return (
     <div className='taskdecnt'>
-      <button className='backbtn' onClick={() => navigate("/dashboard")}>
+      <button className='backbtn' onClick={() => navigate("/task")}>
         <img src={backarrow} alt='' srcset='' />
       </button>
       <h2 className='techdashgreet'>{task.title}</h2>

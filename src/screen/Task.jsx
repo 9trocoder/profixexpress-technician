@@ -198,7 +198,6 @@ function Task() {
               </button>
             ))}
           </div>
-          
         </div>
         <div className='thegap'></div>
         <p className='thetops'>{activenav} Task</p>
@@ -206,7 +205,11 @@ function Task() {
           <div className='thespace'></div>
           {activenav === "new" && newTasks.length > 0 ? (
             newTasks.map((task) => (
-              <div className='taskalertmain' key={task.id}>
+              <div
+                className='taskalertmain'
+                key={task.id}
+                onClick={() => navigate(`/task_details/${task.id}`)}
+              >
                 <p className='tasktitle'>{task.title}</p>
                 <p className='taskparam'>{task.description}</p>
                 <div className='divider'></div>
@@ -306,7 +309,11 @@ function Task() {
           )}
           {activenav === "completed" && completedTasks.length > 0 ? (
             completedTasks.map((task) => (
-              <div className='taskalertmain' key={task.id}>
+              <div
+                className='taskalertmain'
+                key={task.id}
+                onClick={() => navigate(`/task_details/${task.id}`)}
+              >
                 <p className='tasktitle'>{task.title}</p>
                 <p className='taskparam'>Task ID: {task.id}</p>
                 <div className='divider'></div>
@@ -333,7 +340,11 @@ function Task() {
           )}
           {activenav === "cancelled" && cancelledTasks.length > 0 ? (
             cancelledTasks.map((task) => (
-              <div className='taskalertmain' key={task.id}>
+              <div
+                className='taskalertmain'
+                key={task.id}
+                onClick={() => navigate(`/task_details/${task.id}`)}
+              >
                 <p className='tasktitle'>{task.title}</p>
                 <p className='taskparam'>{task.description}</p>
                 <div className='divider'></div>
