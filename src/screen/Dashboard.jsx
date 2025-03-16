@@ -140,7 +140,6 @@ const Dashboard = () => {
               <Link to='/task'>Task</Link>
               <Link to='/earning'>Earning</Link>
               <Link to='/profile'>Profile</Link>
-              <Link to='/edit-profile'>Edit Profile</Link>
               <Link to='/notifications'>Notifications</Link>
               <Link to='/task-history'>Task History</Link>
               <Link to='/reviews'>My Reviews</Link>
@@ -181,7 +180,7 @@ const Dashboard = () => {
               <button className='bookingnotificationicon'>
                 <img src={notificationicon} alt='' srcset='' />
               </button>
-              <button className='bookingprofimg'>
+              <button className='bookingprofimg' onClick={() => navigate('/profile')}>
                 <img src={profileimg} alt='' className='profimg' />
               </button>
             </div>

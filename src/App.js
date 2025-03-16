@@ -39,6 +39,7 @@ import EarningsDashboard from "./screen/Earningsdashboard";
 import ServicePricing from "./screen/Servicepricing";
 import CallTechnician from "./screen/Calltechnician";
 import Chat from "./screen/message_details";
+import Profile from "./screen/Profile";
 
 export const googleMapsApiKey = "AIzaSyCeirrtXS_SjOfBcSX_-uetXg0jtsawF-s";
 
@@ -58,7 +59,7 @@ function App() {
         <Route path='/task_details/:taskId' element={<TaskDetails />} />
         {/* <Route path='/message' element={<Message />} />*/}
         <Route path='/chat/:jobId' element={<Chat />} />
-        <Route path='/edit-profile' element={<EditProfile />} />
+        <Route path='/profile' element={<Profile />} />
         <Route path='/notifications' element={<Notifications />} />
         <Route path='/raise-dispute/:taskId' element={<RaiseDispute />} />
         <Route path='/task-history' element={<TaskHistory />} />

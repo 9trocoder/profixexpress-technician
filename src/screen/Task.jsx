@@ -177,7 +177,10 @@ function Task() {
               <button className='bookingnotificationicon'>
                 <img src={notificationicon} alt='' srcset='' />
               </button>
-              <button className='bookingprofimg'>
+              <button
+                className='bookingprofimg'
+                onClick={() => navigate("/profile")}
+              >
                 <img src={profileimg} alt='' className='profimg' />
               </button>
             </div>
