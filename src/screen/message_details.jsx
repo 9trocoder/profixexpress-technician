@@ -1,95 +1,160 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { auth, db, get, ref } from "../utilities/firebaseConfig";
-import backarrow from "../assets/backwardarrow.svg";
-import profileavatar from "../assets/pravatar.png";
+// src/pages/Chat.js
+import React, { useState, useEffect } from "react";
+import { ref, push, onValue, get } from "firebase/database";
+import { useParams, useNavigate } from "react-router-dom";
+import { auth, db } from "../utilities/firebaseConfig";
+import backicon from "../assets/backicon.svg";
 import imgsend from "../assets/imgicon.svg";
-import sendimg from "../assets/sendimg.svg";
-import { onValue, push } from "firebase/database";
+import sendimg from "../assets/sendicon.svg";
 
-const Chat = ({ chatId }) => {
+const Chat = () => {
+  const { jobId } = useParams();
   const navigate = useNavigate();
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [active, setActive] = useState(true);
-  const [acceptedtsk, setAcceptedtsk] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [newMsg, setNewMsg] = useState("");
 
+  // State for storing current user's name (fetched from realtime database)
+  const [userName, setUserName] = useState("");
+
+  // Fetch chat messages for this job.
   useEffect(() => {
-    const chatRef = ref(db, `chats/${chatId}`);
+    const chatRef = ref(db, `chats/${jobId}`);
     onValue(chatRef, (snapshot) => {
       const data = snapshot.val();
       const msgs = data ? Object.values(data) : [];
       setMessages(msgs);
     });
-  }, [chatId]);
+  }, [jobId]);
+
+  // Fetch the current user's name from the realtime database.
+  useEffect(() => {
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      const uid = currentUser.uid;
+      const userRef = ref(db, `technicians/${uid}`);
+      get(userRef)
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            const userData = snapshot.val();
+            setUserName(userData.fullName || "User");
+          } else {
+            setUserName("User");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching user profile:", error);
+          setUserName("User");
+        });
+    } else {
+      navigate(`/task_details/${jobId}`);
+    }
+  }, [navigate, jobId]);
 
   const sendMessage = () => {
     if (newMsg.trim() === "") return;
+    const currentUser = auth.currentUser;
+    // Use the name fetched from the database (userName) for senderName.
+    const senderName = userName || "User";
     const messageData = {
-      sender: auth.currentUser.uid,
+      sender: currentUser.uid,
+      senderName,
       message: newMsg,
       timestamp: Date.now(),
     };
-    push(ref(db, `chats/${chatId}`), messageData);
+    push(ref(db, `chats/${jobId}`), messageData);
     setNewMsg("");
+  };
+  const formatWhatsAppTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    const now = new Date();
+    // Check if the date is today
+    const isToday = date.toDateString() === now.toDateString();
+    // Check if the date is yesterday
+    const yesterday = new Date(now);
+    yesterday.setDate(now.getDate() - 1);
+    const isYesterday = date.toDateString() === yesterday.toDateString();
+
+    if (isToday) {
+      // Show only time if today.
+      return date.toLocaleTimeString(undefined, {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      });
+    } else if (isYesterday) {
+      // Show "Yesterday, HH:MM AM/PM"
+      return `Yesterday, ${date.toLocaleTimeString(undefined, {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      })}`;
+    } else {
+      // Otherwise, show full date and time.
+      return (
+        date.toLocaleDateString(undefined, {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        }) +
+        ", " +
+        date.toLocaleTimeString(undefined, {
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true,
+        })
+      );
+    }
   };
 
   return (
     <>
-      <div className='techdash'>
-        <button className='backbtn' onClick={() => navigate("/message")}>
-          <img src={backarrow} alt='' srcset='' />
-        </button>
-        <div
-          className='techdashtop'
-          style={{
-            backgroundColor: "#fff",
-            padding: "10px",
-            borderRadius: "16px",
-            borderBottomRightRadius: "0px",
-            borderBottomLeftRadius: "0px",
-          }}
+      <div className='bookingpagechatcnt'>
+        <button
+          className='backicon chatbackbtn'
+          onClick={() => navigate(`/task_details/${jobId}`)}
         >
-          <div className='messagedetailscnt'>
-            <img src={profileavatar} alt='' />
-            <div className='mdcright'>
-              <p className='mdcname'>Ben Affleck</p>
-              <div className='mdcrightstatus'>
-                <div className='sticon'></div>
-                <p>Online</p>
+          <img src={backicon} className='backiconimg' alt='' srcset='' />
+        </button>
+        <div className='thegap'></div>
+        <div className='chatcnt'>
+          {messages.map((msg, index) => {
+            const isCurrentUser = msg.sender === auth.currentUser.uid;
+            return (
+              <div
+                key={index}
+                className={
+                  isCurrentUser ? "thecurrentuser" : "notthecurrentuser"
+                }
+              >
+                <div
+                  className={isCurrentUser ? "thetapisncnt" : "notthetapisncnt"}
+                >
+                  <div className={isCurrentUser ? "thetapins" : "notthetapins"}>
+                    <p className='thesendername'>{msg.senderName}</p>
+                    <p className='thesendertime'>
+                      {formatWhatsAppTimestamp(msg.timestamp)}
+                    </p>
+                  </div>
+
+                  <div
+                    className={
+                      isCurrentUser ? "thecurrentuserbg" : "notthecurrentuserbg"
+                    }
+                  >
+                    <p>{msg.message}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-
-          <div className='thspp'></div>
-        </div>
-
-        <div className='thecontentbd'>
-          <div
-            style={{
-              border: "1px solid #ccc",
-              padding: "10px",
-              height: "200px",
-              overflowY: "scroll",
-            }}
-          >
-            {messages.map((msg, index) => (
-              <p key={index}>
-                <strong>{msg.sender}:</strong> {msg.message}
-              </p>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
-
       <div className='techdashbtm'>
         <div className='techdashbtmcnt'>
-          <button className='imgbtn'>
+          {/* <button className='imgbtn'>
             <img src={imgsend} alt='' srcset='' />
-          </button>
+          </button> */}
           <div className='thetypemsg'>
             <input
               type='text'

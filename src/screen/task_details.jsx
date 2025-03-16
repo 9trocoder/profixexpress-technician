@@ -11,6 +11,7 @@ function TaskDetails() {
   const [task, setTask] = useState(null);
   const navigate = useNavigate();
   const [job, setJob] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     const jobRef = ref(db, `jobs/${taskId}`);
@@ -21,10 +22,38 @@ function TaskDetails() {
     });
   }, [taskId]);
 
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    // Arrays for the short names of days and months.
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    // Get the components of the date.
+    const dayName = days[date.getDay()];
+    const monthName = months[date.getMonth()];
+    const day = String(date.getDate()).padStart(2, "0");
+    const year = date.getFullYear();
+
+    return `${dayName}, ${monthName} ${day}, ${year}`;
+  }
+
   if (!task) return <p>Loading job details...</p>;
 
   return (
-    <div className='taskdecnt'>
+    <div className='bookingpagecnt'>
       <button className='backbtn' onClick={() => navigate("/task")}>
         <img src={backarrow} alt='' srcset='' />
       </button>
@@ -40,10 +69,10 @@ function TaskDetails() {
       <p className='taskinfo'>Task info</p>
       <div className='taskinfocnt'>
         <p className='taskdatebook'>Date booked</p>
-        <p className='taskdatecnt'>Sun, Nov 25, 2025</p>
+        <p className='taskdatecnt'>{formatDate(task.scheduledDate)}</p>
         <div className='divider'></div>
         <p className='taskdatebook'>Location</p>
-        <p className='taskdatecnt'>VI Lagos</p>
+        <p className='taskdatecnt'>{task.address}</p>
         <div className='divider'></div>
         <p className='taskdatebook'>Price breakdown</p>
         <div className='pricebreakitem'>
@@ -64,18 +93,21 @@ function TaskDetails() {
       <div className='thsp'></div>
       <p className='taskinfo'>Task details/notes</p>
       <div className='taskinfocnt'>
-        <p className='taskinfocntpar'>
-          Hi, I need help fixing a leaking faucet in my kitchen. It's been
-          dripping non-stop, and I'd like to get it repaired as soon as
-          possible. Please let me know if you're available and what the next
-          steps are. Thanks!
-        </p>
+        <p className='taskinfocntpar'>{task.description}</p>
       </div>
       <div className='thsp'></div>
 
       <p>Task image</p>
       <div className='taskimageset'>
-        <img src='' alt='' srcset='' />
+        {task.images.map((item, index) => (
+          <img
+            src={item}
+            onClick={() => setSelectedImage(item)}
+            alt=''
+            srcset=''
+            className='taskimgbx'
+          />
+        ))}
       </div>
       <div className='thsp'></div>
       <Link to={`/raise-dispute/${taskId}`}>
@@ -85,7 +117,24 @@ function TaskDetails() {
         <button>Upload Completion Proof</button>
       </Link>
       <div className='thsp'></div>
-      <Chat chatId={taskId} />
+
+      {selectedImage && (
+        <div className='imagemodal' onClick={() => setSelectedImage(null)}>
+          <div className='imagemodal-content'>
+            <span className='close-btn' onClick={() => setSelectedImage(null)}>
+              ×
+            </span>
+            <img src={selectedImage} alt='Full Size' className='fullimage' />
+          </div>
+        </div>
+      )}
+
+      <button
+        className='jdtechopenchat'
+        onClick={() => navigate(`/chat/${taskId}`)}
+      >
+        Open chat
+      </button>
     </div>
   );
 }

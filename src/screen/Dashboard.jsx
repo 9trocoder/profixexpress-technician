@@ -21,6 +21,7 @@ const Dashboard = () => {
   const [pendingCount, setPendingCount] = useState(0);
   const [pendingJobs, setPendingJobs] = useState([]);
   const [activeJobs, setActiveJobs] = useState([]);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const user = auth.currentUser;
@@ -56,7 +57,7 @@ const Dashboard = () => {
         );
         const activeJobs = tasksData.filter(
           (task) =>
-            task.technicianId === technicianId && task.status === "active"
+            task.technicianId === technicianId && task.status === "accepted"
         );
 
         setPendingJobs(pendingJobs);
@@ -66,6 +67,15 @@ const Dashboard = () => {
       }
     });
   }, [navigate]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShow(false); // Hide modal after 3 seconds
+    }, 3000);
+
+    return () => clearTimeout(timer); // Cleanup on unmount
+  }, [show]);
+  // Do not render modal if hidden
 
   const toggleOnlineStatus = () => {
     if (!auth.currentUser) return;
@@ -78,6 +88,7 @@ const Dashboard = () => {
 
   const acceptTask = (taskId) => {
     update(ref(db, `jobs/${taskId}`), { status: "accepted" });
+    setShow(true);
   };
 
   const rejectTask = (taskId) => {
@@ -148,6 +159,16 @@ const Dashboard = () => {
         </div>
       )}
 
+      {show && (
+        <div className='successmodal'>
+          <h1 className='successtitle'>Success!</h1>
+          <p className='successpara'>You have accepted this booking</p>
+          <p className='successpaa'>
+            You've successfully accepted the task. Click below to view the full
+            details and proceed. We look forward to your excellent work!
+          </p>
+        </div>
+      )}
       <div className='bookingpagecnt'>
         {isOpen ? (
           ""

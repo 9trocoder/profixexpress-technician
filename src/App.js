@@ -38,6 +38,7 @@ import LiveLocation from "./screen/Livelocation";
 import EarningsDashboard from "./screen/Earningsdashboard";
 import ServicePricing from "./screen/Servicepricing";
 import CallTechnician from "./screen/Calltechnician";
+import Chat from "./screen/message_details";
 
 export const googleMapsApiKey = "AIzaSyCeirrtXS_SjOfBcSX_-uetXg0jtsawF-s";
 
@@ -55,8 +56,8 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/task' element={<Task />} />
         <Route path='/task_details/:taskId' element={<TaskDetails />} />
-        {/* <Route path='/message' element={<Message />} />
-        <Route path='/message_details' element={<MessageDetails />} /> */}
+        {/* <Route path='/message' element={<Message />} />*/}
+        <Route path='/chat/:jobId' element={<Chat />} />
         <Route path='/edit-profile' element={<EditProfile />} />
         <Route path='/notifications' element={<Notifications />} />
         <Route path='/raise-dispute/:taskId' element={<RaiseDispute />} />
