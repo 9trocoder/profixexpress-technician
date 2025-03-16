@@ -1886,6 +1886,54 @@
   font-weight: bold;
 }
 
+.thetechprof {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 37.8px 0px #0000000d;
+  border: 1px solid #ececec;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.theprofimg {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  object-fit: cover;
+  object-position: center;
+  margin-bottom: 10px;
+}
+
+.theprofname {
+  font-family: Instrument Sans;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 110.00000000000001%;
+  letter-spacing: -1%;
+  text-align: center;
+  color: #16291e;
+  margin-bottom: 5px;
+}
+
+.theprofemail {
+  font-family: Instrument Sans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: -1%;
+  color: #a2aaa5;
+  margin-bottom: 5px;
+}
+
+.theprostarate {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 @keyframes loading-dash {
   0% {
     content: "-";
