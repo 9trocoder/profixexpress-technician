@@ -5,6 +5,7 @@ import ttime from "../assets/ttime.svg";
 import tcalendar from "../assets/tcalendar.svg";
 import tlocation from "../assets/tlocation.svg";
 import profileimg from "../assets/profileimg.png";
+import editingicon from "../assets/editicon.svg";
 import notificationicon from "../assets/notificationicon.svg";
 import { auth, db, ref } from "../utilities/firebaseConfig";
 import { onValue } from "firebase/database";
@@ -114,6 +115,11 @@ const Profile = () => {
               4.5 (108 review) <span>see all review</span>
             </p>
           </div>
+        </div>
+        <div className="thegap"></div>
+        <div className="theprofnap">
+            <p>About me</p>
+            <button><img src={editingicon} alt="" /> Edit</button>
         </div>
       </div>
     </>
